@@ -1,1 +1,2 @@
+#!/command/execlineb -P
 xpra start :99 --bind-tcp=0.0.0.0:7756 --no-daemon --mdns=no --webcam=no --pulseaudio=no --start="xhost +"
