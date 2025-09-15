@@ -4,6 +4,8 @@ set -e
 
 echo "Update Game Server"
 
+GAME_ID=$(yq '.steamid' "/gameservers/$GAMESERVER/bip-ops.yaml")
+
 LOGIN="anonymous"
 if [ ! -z ${STEAM_USER+x} ] && [ ! -z ${STEAM_PASSWORD+x} ]; then
   LOGIN="${STEAM_USER} ${STEAM_PASSWORD}"

@@ -11,6 +11,7 @@ RUN apt-get update \
   xz-utils \
   gnupg \
   locales \
+  yq \
   ca-certificates \
   lib32gcc-s1 lib32stdc++6 lib32z1 \
   && apt-get clean autoclean \
@@ -59,27 +60,17 @@ RUN curl -sfLo - http://media.steampowered.com/client/steamcmd_linux.tar.gz | ta
 # Copy s6-overlay configs
 COPY s6-rc.d /etc/s6-overlay/s6-rc.d
 
-# Copy healthcheck
-COPY healthcheck.sh /usr/bin/healthcheck
+# Copy bip-ops
+COPY bip-ops.sh /usr/bin/bip-ops
 
-# Set default environment variables
-ENV S6_VERBOSITY=1
-ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
+# S6 settings
+ENV S6_VERBOSITY=1\
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
 
-ENV DATA_DIR="/serverdata"
-ENV STEAMCMD_DIR="${DATA_DIR}/steamcmd"
-ENV SERVER_DIR="${DATA_DIR}/serverfiles"
-ENV GAME_ID="template"
-ENV GAME_NAME="template"
-ENV GAME_PARAMS="template"
-ENV GAME_PORT=27015
-ENV VALIDATE="false"
+ENV GAMESERVER=""
 
 # Wine settings
-ENV USE_WINE="true" \
-    # WINEDATA_PATH="/winedata" \
-    WINEARCH=win64 \
-    # WINEPREFIX="/wine" \
+ENV WINEARCH=win64 \
     DISPLAY=:99
 
 # Expose Xpra web server for games that require an X display
@@ -93,4 +84,4 @@ EXPOSE 7777
 
 ENTRYPOINT ["/init"]
 
-CMD ["/usr/bin/healthcheck"]
+CMD ["/usr/bin/bip-ops"]

@@ -1,0 +1,7 @@
+#!/command/with-contenv bash
+
+if [ ! -f "/gameservers/$GAMESERVER/monitor.sh" ]; then
+  sleep infinity
+fi
+
+exec /gameservers/$GAMESERVER/monitor.sh

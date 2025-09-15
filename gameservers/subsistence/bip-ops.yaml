@@ -1,6 +1,8 @@
+game: Subsistence
 usewine: true
 usex: true
 backup: backup.sh
 restore: restore.sh
 start: start.sh
 monitor: monitor.sh
+steamid: 1362640
