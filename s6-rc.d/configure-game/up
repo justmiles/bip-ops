@@ -1,1 +1,1 @@
-/etc/s6-overlay/s6-rc.d/update-game/scripts/update-game.sh
+/etc/s6-overlay/s6-rc.d/configure-game/scripts/configure-game.sh

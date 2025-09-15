@@ -24,11 +24,14 @@ RUN sed -i "s/# en_US.UTF-8/en_US.UTF-8/" /etc/locale.gen \
 
 # Install wine and its dependencies
 RUN dpkg --add-architecture i386 \
-  && apt update \
-  && apt install -y --no-install-recommends wine wine64 winbind xvfb wine32:i386 \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends wine wine64 winbind xvfb wine32:i386 \
   && apt upgrade -y \
   && mkdir /usr/share/wine/mono \
-  && curl -sfLo - https://dl.winehq.org/wine/wine-mono/8.1.0/wine-mono-8.1.0-x86.tar.xz | tar -Jxpf - -C /usr/share/wine/mono
+  && curl -sfLo - https://dl.winehq.org/wine/wine-mono/8.1.0/wine-mono-8.1.0-x86.tar.xz | tar -Jxpf - -C /usr/share/wine/mono \
+  && apt-get clean autoclean \
+  && apt-get autoremove --yes \
+  && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # Add winetricks
 RUN curl -sfLo /usr/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
@@ -41,7 +44,10 @@ RUN apt-get update \
   && curl -sfLo - https://xpra.org/gpg.asc | apt-key add - \
   && apt-get update \
   && apt-get install -y xpra \
-  && mkdir -p /run/user/0/xpra
+  && mkdir -p /run/user/0/xpra \
+  && apt-get clean autoclean \
+  && apt-get autoremove --yes \
+  && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # Install s6-overlay
 ENV S6_OVERLAY_VERSION="3.2.1.0"
@@ -56,6 +62,10 @@ RUN curl -sfLo - http://media.steampowered.com/client/steamcmd_linux.tar.gz | ta
   && /usr/lib/steamcmd/steamcmd.sh \
   +login anonymous \
   +quit
+
+# install confd
+RUN curl -sfLo /usr/bin/gomplate https://github.com/hairyhenderson/gomplate/releases/download/v4.3.3/gomplate_linux-amd64 \
+  && chmod +x /usr/bin/gomplate
 
 # Copy s6-overlay configs
 COPY s6-rc.d /etc/s6-overlay/s6-rc.d
@@ -73,14 +83,10 @@ ENV S6_VERBOSITY=1 \
 ENV WINEARCH=win64 \
     DISPLAY=:99
 
+ENV VALIDATE_SERVER_FILES=true
+
 # Expose Xpra web server for games that require an X display
 EXPOSE 7756
-
-# Expose UDP game port
-EXPOSE 7777
-
-# Expose Query Port
-EXPOSE 7777
 
 ENTRYPOINT ["/init"]
 

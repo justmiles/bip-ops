@@ -1,5 +1,10 @@
 #!/command/with-contenv bash
 
-if [  -f "/gameservers/$GAMESERVER/configure.sh" ]; then
-  exec /gameservers/$GAMESERVER/configure.sh
+set -ex
+
+if [  -f "/gameservers/$GAMESERVER/.gomplate.yaml" ]; then
+  cd /gameservers/$GAMESERVER/
+  gomplate --verbose --config .gomplate.yaml
 fi
+
+set +x

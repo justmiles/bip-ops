@@ -11,4 +11,6 @@ monitor_logfile() {
 
 monitor_logfile /game/UDKGame/Logs/Launch.log &
 
+echo "Launching gameserver!"
+
 wine /game/Binaries/Win64/UDK.exe server coldmap1?steamsockets -logroot
