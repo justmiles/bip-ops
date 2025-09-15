@@ -1,0 +1,15 @@
+#!/command/with-contenv bash
+
+while true; do
+
+  sleep 3600
+
+  if [  -f "/gameservers/$GAMESERVER/backup.sh" ]; then
+    echo "Backup up $GAMESERVER"
+    exec /gameservers/$GAMESERVER/backup.sh
+  fi
+
+  # prune old backups
+  ls -1t /backups/ | tail -n +5 | xargs -r rm --
+
+done

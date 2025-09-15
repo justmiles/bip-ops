@@ -1,4 +1,14 @@
-#!/bin/bash
+#!/command/with-contenv bash
+
+if [ -z "${GAMESERVER+x}" ]; then
+  echo "GAMESERVER is not set" && exit 1
+fi
+
+if [ ! -d "/gameservers/$GAMESERVER" ]; then
+  echo "GAMESERVER "$GAMESERVER" is not supported" && exit 1
+fi
+
+echo "Launching Game Server: $GAMESERVER"
 
 function shutdownhook() {
   echo "Shutting down..."
@@ -12,7 +22,12 @@ function shutdownhook() {
 trap shutdownhook EXIT
 
 if [ ! -f "/gameservers/$GAMESERVER/start.sh" ]; then
-  echo "$GAMESERVER/start.sh"" not found!"; exit 1
+  echo "$GAMESERVER/start.sh"" not found!"
+  exit 1
 fi
 
 exec /gameservers/$GAMESERVER/start.sh
+
+
+echo "SLEEPING FOR DEV"
+sleep infinity

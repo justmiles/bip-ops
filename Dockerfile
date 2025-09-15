@@ -59,15 +59,15 @@ RUN curl -sfLo - http://media.steampowered.com/client/steamcmd_linux.tar.gz | ta
 
 # Copy s6-overlay configs
 COPY s6-rc.d /etc/s6-overlay/s6-rc.d
+COPY gameservers /gameservers
 
 # Copy bip-ops
 COPY bip-ops.sh /usr/bin/bip-ops
 
 # S6 settings
-ENV S6_VERBOSITY=1\
-    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
-
-ENV GAMESERVER=""
+ENV S6_VERBOSITY=1 \
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
+    S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
 # Wine settings
 ENV WINEARCH=win64 \

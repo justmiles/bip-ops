@@ -1,9 +1,4 @@
 game: Sons of The Forest
 usewine: true
 usex: true
-backup: backup.sh
-restore: restore.sh
-start: start.sh
-monitor: monitor.sh
-configure: configure.sh
-steamid: 1362640
+steamid: 2465200
