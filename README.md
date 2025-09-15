@@ -15,8 +15,8 @@ BipOps provides a standardized Docker-based environment for running various game
 
 Currently, BIP-OPS supports the following games:
 
-- Sons of the Forest
-- Subsistence
+- Subsistence - [quickstart here](./gameservers/subsistence/README.md)
+- Sons of the Forest - (in-progress)
 
 Each game has its own configuration and management scripts.
 
