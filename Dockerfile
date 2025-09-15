@@ -40,8 +40,10 @@ RUN curl -sfLo /usr/bin/winetricks https://raw.githubusercontent.com/Winetricks/
 # Add Xpra
 RUN apt-get update \
   && apt-get install -y wget gnupg xvfb x11-xserver-utils python3-pip \
-  && echo "deb [arch=amd64] https://xpra.org/ noble main" > /etc/apt/sources.list.d/xpra.list \
-  && curl -sfLo - https://xpra.org/gpg.asc | apt-key add - \
+  && mkdir -p /etc/apt/keyrings \
+  && curl -fsSL https://xpra.org/gpg.asc -o /etc/apt/keyrings/xpra.asc \
+  && chmod 644 /etc/apt/keyrings/xpra.asc \
+  && echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/xpra.asc] https://xpra.org/ noble main" > /etc/apt/sources.list.d/xpra.list \
   && apt-get update \
   && apt-get install -y xpra \
   && mkdir -p /run/user/0/xpra \

@@ -6,7 +6,7 @@ while true; do
 
   if [  -f "/gameservers/$GAMESERVER/backup.sh" ]; then
     echo "Backup up $GAMESERVER"
-    exec /gameservers/$GAMESERVER/backup.sh
+    /gameservers/$GAMESERVER/backup.sh
   fi
 
   # prune old backups

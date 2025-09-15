@@ -14,11 +14,11 @@ function shutdownhook() {
   echo "Shutting down..."
 
   if [ -f "/gameservers/$GAMESERVER/backup.sh" ]; then
-    exec /gameservers/$GAMESERVER/backup.sh
+    /gameservers/$GAMESERVER/backup.sh
   fi
 
   if [ -f "/gameservers/$GAMESERVER/shutdown.sh" ]; then
-    exec /gameservers/$GAMESERVER/shutdown.sh
+    /gameservers/$GAMESERVER/shutdown.sh
   fi
 
 }
@@ -30,5 +30,4 @@ if [ ! -f "/gameservers/$GAMESERVER/start.sh" ]; then
   exit 1
 fi
 
-exec /gameservers/$GAMESERVER/start.sh
-
+/gameservers/$GAMESERVER/start.sh
