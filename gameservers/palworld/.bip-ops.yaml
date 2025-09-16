@@ -1,0 +1,7 @@
+game: Palworld
+usewine: false
+usex: false
+steamid: 2394010
+configs:
+  "config/PalWorldSettings.ini": "/palworld/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini"
+  "config/Engine.ini": "/palworld/Pal/Saved/Config/LinuxServer/Engine.ini"
