@@ -33,7 +33,7 @@ Each game has its own configuration and management scripts.
 2. Run a game server container:
    ```bash
    docker run -d \
-     -e GAMESERVER=subsistence \
+     -e BIPOPS_GAMESERVER=subsistence \
      -p 7777:7777/udp \
      -p 7756:7756 \
      -v /path/to/backups:/backups \
@@ -44,10 +44,10 @@ Each game has its own configuration and management scripts.
 
 ### Environment Variables
 
-- `GAMESERVER`: (Required) The game server to run (e.g., "subsistence", "sonsoftheforest")
+- `BIPOPS_GAMESERVER`: (Required) The game server to run (e.g., "subsistence", "sonsoftheforest")
 - `STEAM_USER`: (Optional) Steam username for non-anonymous downloads
 - `STEAM_PASSWORD`: (Optional) Steam password
-- `VALIDATE_SERVER_FILES`: (Optional) Set to "true" to validate game files at launch
+- `BIPOPS_VALIDATE_SERVER_FILES`: (Optional) Set to "true" to validate game files at launch
 
 ## Game Server Configuration
 
@@ -111,6 +111,7 @@ To add support for a new game server:
 - add CI/CD
 - add additional steam games
 - add non-steam games
+- add support for manual config files via environment variable `BIPOPS_MANUAL_CONFIG=true`; eg, do not run `configure-game.sh` and instead let the user hand-roll their config files.
 - Subsistence:
   - figure out why Subsistence is overwriting configs on boot (this is mitigated as we are just editing the "default" config and letting it overwrite existing settings with our modified defaults)
 - SOFT:

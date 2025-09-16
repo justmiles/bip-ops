@@ -4,9 +4,9 @@ while true; do
 
   sleep 3600
 
-  if [  -f "/gameservers/$GAMESERVER/backup.sh" ]; then
-    echo "Backup up $GAMESERVER"
-    /gameservers/$GAMESERVER/backup.sh
+  if [  -f "/gameservers/$BIPOPS_GAMESERVER/backup.sh" ]; then
+    echo "Backup up $BIPOPS_GAMESERVER"
+    /gameservers/$BIPOPS_GAMESERVER/backup.sh
   fi
 
   # prune old backups

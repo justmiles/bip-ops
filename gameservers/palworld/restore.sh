@@ -3,7 +3,7 @@
 set -e
 
 # Create backup before restore
-/gameservers/$GAMESERVER/backup.sh
+/gameservers/$BIPOPS_GAMESERVER/backup.sh
 
 rm -rf /game/Pal/Saved
 mkdir -p /game/Pal/Saved

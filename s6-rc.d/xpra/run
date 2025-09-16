@@ -1,6 +1,6 @@
 #!/command/with-contenv bash
 
-USEX=$(yq '.usex' "/gameservers/$GAMESERVER/.bip-ops.yaml")
+USEX=$(yq '.usex' "/gameservers/$BIPOPS_GAMESERVER/.bip-ops.yaml")
 
 if [ "$USEX" == "true" ]; then
   xpra start :99 --bind-tcp=0.0.0.0:7756 --no-daemon --mdns=no --webcam=no --pulseaudio=no --start="xhost +"

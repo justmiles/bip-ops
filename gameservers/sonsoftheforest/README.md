@@ -6,7 +6,7 @@ This document describes the configuration options for the Sons of the Forest ded
 
 ```bash
 docker run --rm -it --name bip-ops \
-  -e GAMESERVER=sonsoftheforest \
+  -e BIPOPS_GAMESERVER=sonsoftheforest \
   -e SOTF_SERVER_NAME="BipOps Server" \
   -e SOTF_PASSWORD=password \
   -p 8766:8766/udp \
@@ -46,7 +46,8 @@ For detailed information about these settings, please refer to the [Steam Commun
 
 | Environment Variable                   | Default Value             | Description                                                                                                                       | Accepted Values                                                  |
 | -------------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `GAMESERVER`                           |                           | Must be set to "sonsoftheforest" for bip-ops to run Sons of The Forest                                                            | sonsoftheforest                                                  |
+| `BIPOPS_GAMESERVER`                    |                           | Must be set to "sonsoftheforest" for bip-ops to run Sons of The Forest                                                            | sonsoftheforest                                                  |
+| `BIPOPS_VALIDATE_SERVER_FILES`         | `true`                    | Validate server files are up to date before launching server instance                                                             | true, false                                                      |
 | `SOTF_IP_ADDRESS`                      | `0.0.0.0`                 | Listening interface for the game server, usually 0.0.0.0 if listening on all interfaces.                                          | any string formatted ipv4 address                                |
 | `SOTF_GAME_PORT`                       | `8766`                    | UDP port used for gameplay netcode.                                                                                               | integer                                                          |
 | `SOTF_QUERY_PORT`                      | `27016`                   | UDP port used by Steam to list the server and enable the discovery services.                                                      | integer                                                          |

@@ -85,7 +85,9 @@ ENV S6_VERBOSITY=1 \
 ENV WINEARCH=win64 \
     DISPLAY=:99
 
-ENV VALIDATE_SERVER_FILES=true
+# BipOps settings
+ENV BIPOPS_GAMESERVER=NONE \
+    BIPOPS_VALIDATE_SERVER_FILES=true
 
 # Expose Xpra web server for games that require an X display
 EXPOSE 7756

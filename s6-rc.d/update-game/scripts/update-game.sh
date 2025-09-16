@@ -4,8 +4,8 @@ set -e
 
 echo "Update Game Server"
 
-GAME_ID=$(yq '.steamid' "/gameservers/$GAMESERVER/.bip-ops.yaml")
-USE_WINE=$(yq '.usewine' "/gameservers/$GAMESERVER/.bip-ops.yaml")
+GAME_ID=$(yq '.steamid' "/gameservers/$BIPOPS_GAMESERVER/.bip-ops.yaml")
+USE_WINE=$(yq '.usewine' "/gameservers/$BIPOPS_GAMESERVER/.bip-ops.yaml")
 
 LOGIN="anonymous"
 if [ ! -z ${STEAM_USER+x} ] && [ ! -z ${STEAM_PASSWORD+x} ]; then
@@ -13,7 +13,7 @@ if [ ! -z ${STEAM_USER+x} ] && [ ! -z ${STEAM_PASSWORD+x} ]; then
 fi
 
 APP_UPDATE="${GAME_ID}"
-if [ "${VALIDATE_SERVER_FILES}" == "true" ]; then
+if [ "${BIPOPS_VALIDATE_SERVER_FILES}" == "true" ]; then
   APP_UPDATE="${GAME_ID} validate"
 fi
 

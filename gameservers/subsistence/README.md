@@ -6,7 +6,7 @@ This directory contains the configuration and scripts for running a Subsistence 
 
 ```bash
 docker run --rm -it --name bip-ops \
-  -e GAMESERVER=subsistence \
+  -e BIPOPS_GAMESERVER=subsistence \
   -e SUBSISTENCE_SERVER_NAME="BipOps Subsistence Server" \
   -e SUBSISTENCE_PASSWORD=password \
   -e SUBSISTENCE_HUNTERS_ENABLED=false \
@@ -35,7 +35,8 @@ docker run --rm -it --name bip-ops \
 
 | Variable                                               | Default                   | Description                                                                                       |
 | ------------------------------------------------------ | ------------------------- | ------------------------------------------------------------------------------------------------- |
-| GAMESERVER                                             | (required)                | Must be set to "subsistence"                                                                      |
+| BIPOPS_GAMESERVER                                      | (required)                | Must be set to "subsistence"                                                                      |
+| BIPOPS_VALIDATE_SERVER_FILES                           | true                      | Validate server files are up to date before launching server instance                             |
 | SUBSISTENCE_PROFILE_ID                                 | 1                         | Must be a value between 1 to 5. Can be used to store 5 separate saves on a single server instance |
 | SUBSISTENCE_HUNTERS_ENABLED                            | true                      | Whether hunters are enabled (true/false)                                                          |
 | SUBSISTENCE_HUNTERS_ATTACKS                            | 0                         | Hunter attack behavior: 0 = normal attacks, 1 = only revenge attacks, 2 = no attacks              |

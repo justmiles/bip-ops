@@ -1,33 +1,33 @@
 #!/command/with-contenv bash
 
-if [ -z "${GAMESERVER+x}" ]; then
-  echo "GAMESERVER is not set" && exit 1
+if [ -z "${BIPOPS_GAMESERVER+x}" ]; then
+  echo "BIPOPS_GAMESERVER is not set" && exit 1
 fi
 
-if [ ! -d "/gameservers/$GAMESERVER" ]; then
-  echo "GAMESERVER "$GAMESERVER" is not supported" && exit 1
+if [ ! -d "/gameservers/$BIPOPS_GAMESERVER" ]; then
+  echo "BIPOPS_GAMESERVER "$BIPOPS_GAMESERVER" is not supported" && exit 1
 fi
 
-echo "Launching Game Server: $GAMESERVER"
+echo "Launching Game Server: $BIPOPS_GAMESERVER"
 
 function shutdownhook() {
   echo "Shutting down..."
 
-  if [ -f "/gameservers/$GAMESERVER/backup.sh" ]; then
-    /gameservers/$GAMESERVER/backup.sh
+  if [ -f "/gameservers/$BIPOPS_GAMESERVER/backup.sh" ]; then
+    /gameservers/$BIPOPS_GAMESERVER/backup.sh
   fi
 
-  if [ -f "/gameservers/$GAMESERVER/shutdown.sh" ]; then
-    /gameservers/$GAMESERVER/shutdown.sh
+  if [ -f "/gameservers/$BIPOPS_GAMESERVER/shutdown.sh" ]; then
+    /gameservers/$BIPOPS_GAMESERVER/shutdown.sh
   fi
 
 }
 
 trap shutdownhook EXIT
 
-if [ ! -f "/gameservers/$GAMESERVER/start.sh" ]; then
-  echo "$GAMESERVER/start.sh"" not found!"
+if [ ! -f "/gameservers/$BIPOPS_GAMESERVER/start.sh" ]; then
+  echo "$BIPOPS_GAMESERVER/start.sh"" not found!"
   exit 1
 fi
 
-/gameservers/$GAMESERVER/start.sh
+/gameservers/$BIPOPS_GAMESERVER/start.sh
