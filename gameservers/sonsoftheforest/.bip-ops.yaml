@@ -2,3 +2,7 @@ game: Sons of The Forest
 usewine: true
 usex: true
 steamid: 2465200
+configs:
+  "config/dedicatedserver.cfg": "/config/dedicatedserver.cfg"
+  "config/ownerswhitelist.txt": "/config/ownerswhitelist.txt"
+  "config/steam_appid.txt": "/config/steam_appid.txt"

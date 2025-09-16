@@ -2,3 +2,5 @@ game: Subsistence
 usewine: true
 usex: true
 steamid: 1362640
+configs:
+  "UDKDedServerSettings.ini": /game/UDKGame/Config/DefaultDedServerSettings.ini

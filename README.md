@@ -113,3 +113,5 @@ To add support for a new game server:
 - add non-steam games
 - Subsistence:
   - figure out why Subsistence is overwriting configs on boot (this is mitigated as we are just editing the "default" config and letting it overwrite existing settings with our modified defaults)
+- SOFT:
+  - backups

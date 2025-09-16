@@ -1,4 +1,0 @@
-inputFiles:
-  - UDKDedServerSettings.ini
-outputFiles:
-  - /game/UDKGame/Config/DefaultDedServerSettings.ini

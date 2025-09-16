@@ -2,6 +2,21 @@
 
 This directory contains the configuration and scripts for running a Subsistence game server using BipOps.
 
+## Quickstart
+
+```bash
+docker run --rm -it --name bip-ops \
+  -e GAMESERVER=subsistence \
+  -e SUBSISTENCE_SERVER_NAME="BipOps Subsistence Server" \
+  -e SUBSISTENCE_PASSWORD=password \
+  -e SUBSISTENCE_HUNTERS_ENABLED=false \
+  -p 7777:7777/udp \
+  -p 27015:27015/udp \
+  -v /path/to/gameservers/subsistence/game:/game \
+  -v /path/to/gameservers/subsistence/backups:/backups \
+  justmiles/bip-ops
+```
+
 ## Required Ports
 
 | Port  | Protocol | Description      |
@@ -38,20 +53,3 @@ This directory contains the configuration and scripts for running a Subsistence 
 | SUBSISTENCE_PLAYERS_CAN_DAMAGE_PLAYER_BASES            | true                      | If true, players can damage player-placed buildables                                              |
 | SUBSISTENCE_OFFLINE_BASE_PROTECTION                    | true                      | If true, player bases are protected from damage while players are offline                         |
 | SUBSISTENCE_PLAYERS_CAN_ACCESS_ENEMY_PLAYER_BASE_ITEMS | true                      | If true, players can access enemy player base items                                               |
-
-## Example
-
-```bash
-docker run --rm -it --name bip-ops \
-  -e GAMESERVER=subsistence \
-  -e SUBSISTENCE_SERVER_NAME="BipOps Subsistence Server" \
-  -e SUBSISTENCE_PASSWORD=password \
-  -e SUBSISTENCE_HUNTERS_ENABLED=false \
-  -p 7756:7756 \
-  -p 7777:7777/udp \
-  -p 27015:27015/udp \
-  -p 27015:27015/tcp \
-  -v /path/to/gameservers/subsistence/game:/game \
-  -v /path/to/gameservers/subsistence/backups:/backups \
-  justmiles/bip-ops
-```
