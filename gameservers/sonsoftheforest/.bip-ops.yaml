@@ -3,5 +3,5 @@ usewine: true
 usex: true
 steamid: 2465200
 configs:
-  "config/dedicatedserver.cfg": "/config/dedicatedserver.cfg"
-  "config/ownerswhitelist.txt": "/config/ownerswhitelist.txt"
+  "config/dedicatedserver.cfg": "/userdata/dedicatedserver.cfg"
+  "config/ownerswhitelist.txt": "/userdata/ownerswhitelist.txt"

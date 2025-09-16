@@ -10,11 +10,29 @@ docker run --rm -it --name bip-ops \
   -e SOTF_SERVER_NAME="BipOps Server" \
   -e SOTF_PASSWORD=password \
   -p 8766:8766/udp \
+  -p 9700:9700/udp \
   -p 27016:27016/udp \
   -v /path/to/gameservers/sonsoftheforest/game:/game \
+  -v /path/to/gameservers/sonsoftheforest/saves:/userdata/Saves \
   -v /path/to/gameservers/sonsoftheforest/backups:/backups \
   justmiles/bip-ops
 ```
+
+## Network Ports
+
+| Port  | Protocol | Description     |
+| ----- | -------- | --------------- |
+| 8766  | UDP      | Game connection |
+| 9700  | UDP      | Blob sync       |
+| 27016 | UDP      | Steam query     |
+
+## Volumes
+
+| Path            | Description                         |
+| --------------- | ----------------------------------- |
+| /game           | Cache for the gameserver files      |
+| /userdata/Saves | Current game save data              |
+| /backups        | Storage for older game save backups |
 
 ## Configuration
 

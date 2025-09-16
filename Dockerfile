@@ -57,7 +57,7 @@ RUN curl -sfLo - https://github.com/just-containers/s6-overlay/releases/download
 RUN curl -sfLo - https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-x86_64.tar.xz | tar -Jxpf - -C /
 
 # Create required directories
-RUN mkdir -p /usr/lib/steamcmd /game
+RUN mkdir -p /usr/lib/steamcmd /game /backups
 
 # Install and update steamcmd
 RUN curl -sfLo - http://media.steampowered.com/client/steamcmd_linux.tar.gz | tar -xzf - -C /usr/lib/steamcmd \
