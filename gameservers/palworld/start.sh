@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 cd /game
 
@@ -22,4 +23,5 @@ fi
 
 # Start the game server
 echo "Starting Palworld Dedicated Server..."
+set -x
 ./PalServer.sh "${START_OPTIONS[@]}"

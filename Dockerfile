@@ -1,5 +1,7 @@
 FROM ubuntu:noble
 
+RUN userdel -r ubuntu && useradd --create-home bipops
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install basic Apt Packages
@@ -87,6 +89,9 @@ ENV WINEARCH=win64 \
 
 # BipOps settings
 ENV BIPOPS_GAMESERVER=NONE \
+    BIPOPS_UID=1000 \
+    BIPOPS_GID=1000 \
+    BIPOPS_BACKUP_INTERVAL=3600 \
     BIPOPS_VALIDATE_SERVER_FILES=true
 
 # Expose Xpra web server for games that require an X display

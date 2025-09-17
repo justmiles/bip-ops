@@ -1,12 +1,13 @@
 #!/command/with-contenv bash
 
+mkdir -p /backups
 while true; do
 
-  sleep 3600
+  sleep $BIPOPS_BACKUP_INTERVAL
 
   if [  -f "/gameservers/$BIPOPS_GAMESERVER/backup.sh" ]; then
     echo "Backup up $BIPOPS_GAMESERVER"
-    /gameservers/$BIPOPS_GAMESERVER/backup.sh
+    s6-setuidgid bipops /gameservers/$BIPOPS_GAMESERVER/backup.sh
   fi
 
   # prune old backups

@@ -22,11 +22,16 @@ if [ "${USE_WINE}" == "true" ]; then
   PLATFORM_TYPE="windows"
 fi
 
+CURRENT_OWNER=$(stat -c "%U" /game)
+
 /usr/lib/steamcmd/steamcmd.sh \
   +@sSteamCmdForcePlatformType ${PLATFORM_TYPE} \
   +force_install_dir /game \
   +login ${LOGIN} \
   +app_update ${APP_UPDATE} \
   +quit
+
+chown -R bipops:bipops /game
+chmod -R 755 /game
 
 echo "Game Server up to date!"

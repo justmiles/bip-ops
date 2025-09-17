@@ -10,12 +10,9 @@ docker run --rm -it --name bip-ops \
   -e PALWORLD_SERVER_NAME="BipOps Palworld Server" \
   -e PALWORLD_SERVER_PASSWORD=yourpassword \
   -e PALWORLD_ADMIN_PASSWORD=youradminpassword \
-  -e PALWORLD_MAX_PLAYERS=32 \
+  -e PALWORLD_MAX_PLAYERS=24 \
   -p 8211:8211/udp \
-  -p 8212:8212/tcp \
-  -p 25575:25575/tcp \
   -v /path/to/gameservers/palworld/game:/game \
-  -v /path/to/gameservers/palworld/saves:/palworld/Pal/Saved \
   -v /path/to/gameservers/palworld/backups:/backups \
   justmiles/bip-ops
 ```
@@ -30,11 +27,10 @@ docker run --rm -it --name bip-ops \
 
 ## Volume Mounts
 
-| Host Path                             | Container Path      | Description            |
-| ------------------------------------- | ------------------- | ---------------------- |
-| /path/to/gameservers/palworld/game    | /game               | Game files directory   |
-| /path/to/gameservers/palworld/saves   | /palworld/Pal/Saved | Game save files        |
-| /path/to/gameservers/palworld/backups | /backups            | Backup files directory |
+| Host Path                             | Container Path | Description            |
+| ------------------------------------- | -------------- | ---------------------- |
+| /path/to/gameservers/palworld/game    | /game          | Game files directory   |
+| /path/to/gameservers/palworld/backups | /backups       | Backup files directory |
 
 ## Environment Variables
 
@@ -80,12 +76,12 @@ docker run --rm -it --name bip-ops \
 
 ### Advanced Settings
 
-For a complete list of all available environment variables, please refer to the [Palworld Tech Guide](https://tech.palworldgame.com/settings-and-operation/configuration).
+For a complete list of all configuration options, please refer to the [Palworld Tech Guide](https://tech.palworldgame.com/settings-and-operation/configuration).
 
 ## Server Administration
 
 You can use RCON to administer your server. Connect to the RCON port (default: 25575) using an RCON client with the PALWORLD_ADMIN_PASSWORD you set.
-
+ 
 Common RCON commands:
 
 - `Shutdown <Seconds> <MessageText>`: Shutdown the server after specified seconds with a message

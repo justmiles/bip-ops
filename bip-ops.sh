@@ -30,4 +30,5 @@ if [ ! -f "/gameservers/$BIPOPS_GAMESERVER/start.sh" ]; then
   exit 1
 fi
 
-/gameservers/$BIPOPS_GAMESERVER/start.sh
+chown -R /game 
+s6-setuidgid bipops /gameservers/$BIPOPS_GAMESERVER/start.sh
