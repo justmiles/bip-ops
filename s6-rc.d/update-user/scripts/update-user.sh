@@ -1,5 +1,4 @@
 #!/command/with-contenv bash
-
 set -e
 
 # Set bipops UID/GID

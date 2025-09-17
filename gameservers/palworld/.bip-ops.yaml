@@ -3,5 +3,5 @@ usewine: false
 usex: false
 steamid: 2394010
 configs:
-  "config/PalWorldSettings.ini": "/palworld/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini"
-  "config/Engine.ini": "/palworld/Pal/Saved/Config/LinuxServer/Engine.ini"
+  "config/PalWorldSettings.ini": "/game/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini"
+  "config/Engine.ini": "/game/Pal/Saved/Config/LinuxServer/Engine.ini"

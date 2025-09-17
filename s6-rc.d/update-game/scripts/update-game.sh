@@ -1,5 +1,4 @@
 #!/command/with-contenv bash
-
 set -e
 
 echo "Update Game Server"
@@ -24,14 +23,13 @@ fi
 
 CURRENT_OWNER=$(stat -c "%U" /game)
 
-/usr/lib/steamcmd/steamcmd.sh \
+cd /game
+
+USER=bipops HOME=/home/bipops s6-setuidgid bipops /usr/lib/steamcmd/steamcmd.sh \
   +@sSteamCmdForcePlatformType ${PLATFORM_TYPE} \
   +force_install_dir /game \
   +login ${LOGIN} \
   +app_update ${APP_UPDATE} \
   +quit
-
-chown -R bipops:bipops /game
-chmod -R 755 /game
 
 echo "Game Server up to date!"

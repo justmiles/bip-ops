@@ -1,4 +1,5 @@
 #!/command/with-contenv bash
+set -e
 
 echo "Update SteamCMD"
 
@@ -7,7 +8,7 @@ if [ ! -z ${STEAM_USER+x} ] && [ ! -z ${STEAM_PASSWORD+x} ]; then
   LOGIN="${STEAM_USER} ${STEAM_PASSWORD}"
 fi
 
-/usr/lib/steamcmd/steamcmd.sh \
+HOME=/home/bipops s6-setuidgid bipops /usr/lib/steamcmd/steamcmd.sh \
   +login $LOGIN \
   +quit
 
