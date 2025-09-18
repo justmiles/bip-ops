@@ -14,11 +14,11 @@ function shutdownhook() {
   echo "Shutting down..."
 
   if [ -f "/gameservers/$BIPOPS_GAMESERVER/backup.sh" ]; then
-    /gameservers/$BIPOPS_GAMESERVER/backup.sh
+    s6-setuidgid bipops /gameservers/$BIPOPS_GAMESERVER/backup.sh
   fi
 
   if [ -f "/gameservers/$BIPOPS_GAMESERVER/shutdown.sh" ]; then
-    /gameservers/$BIPOPS_GAMESERVER/shutdown.sh
+    s6-setuidgid bipops /gameservers/$BIPOPS_GAMESERVER/shutdown.sh
   fi
 
 }
@@ -30,5 +30,4 @@ if [ ! -f "/gameservers/$BIPOPS_GAMESERVER/start.sh" ]; then
   exit 1
 fi
 
-chown -R /game 
-s6-setuidgid bipops /gameservers/$BIPOPS_GAMESERVER/start.sh
+USER=bipops HOME=/home/bipops s6-setuidgid bipops /gameservers/$BIPOPS_GAMESERVER/start.sh
