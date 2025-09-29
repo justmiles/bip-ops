@@ -1,6 +1,7 @@
 #!/command/with-contenv bash
 
 mkdir -p /backups
+cd /backups
 while true; do
 
   sleep $BIPOPS_BACKUP_INTERVAL
