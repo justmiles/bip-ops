@@ -15,7 +15,7 @@ done
 export BIPOPS_BACKUP_DIRECTORY=$(yq -r '.backupdir' "/gameservers/$BIPOPS_GAMESERVER/.bip-ops.yaml")
 mkdir -p $BIPOPS_BACKUP_DIRECTORY
 chown -R bipops:bipops $BIPOPS_BACKUP_DIRECTORY
-gomplate --file /etc/s6-overlay/s6-rc.d/configure-game/configure.d/rsnapshot.conf --out /etc/rsnapshot.conf
+gomplate --file /etc/s6-overlay/s6-rc.d/configure-game/conf.d/rsnapshot.conf --out /etc/rsnapshot.conf
 
 # Validate backup configuration
 rsnapshot configtest >/dev/null

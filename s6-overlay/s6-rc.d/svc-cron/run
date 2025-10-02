@@ -1,3 +1,0 @@
-#!/command/with-contenv bash
-
-exec s6-setuidgid bipops /usr/bin/cfc daemon -vvv -c /etc/s6-overlay/config/cfc.ini 2>&1 | s6-log -bp n3 pcron 1 /var/log/cron

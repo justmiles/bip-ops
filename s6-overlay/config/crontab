@@ -1,7 +1,0 @@
-MAILTO=""
-
-* * * * *   /usr/bin/rsnapshot -c /etc/rsnapshot.conf latest
-@hourly     /usr/bin/rsnapshot -c /etc/rsnapshot.conf hourly
-@hourly     /usr/bin/rsnapshot -c /etc/rsnapshot.conf daily
-@hourly     /usr/bin/rsnapshot -c /etc/rsnapshot.conf weekly
-* * * * *   date
