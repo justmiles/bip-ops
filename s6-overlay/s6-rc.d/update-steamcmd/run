@@ -1,4 +1,4 @@
 #!/command/with-contenv bash
 set -e
 
-/etc/s6-overlay/s6-rc.d/update-steamcmd/scripts/update-steamcmd.sh | s6-log -bp n3 pupdate-steamcmd 1 /var/log/update-steamcmd
+/etc/s6-overlay/s6-rc.d/update-steamcmd/scripts/update-steamcmd.sh 2>&1 | s6-log -bp n3 pinit 1 /var/log/init

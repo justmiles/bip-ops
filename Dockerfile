@@ -1,3 +1,7 @@
+# Build stage
+FROM rust:slim AS builder
+RUN cargo install cfc
+
 FROM ubuntu:noble
 
 RUN userdel -r ubuntu && useradd --create-home bipops
@@ -72,6 +76,9 @@ RUN curl -sfLo - http://media.steampowered.com/client/steamcmd_linux.tar.gz | ta
 # install confd
 RUN curl -sfLo /usr/bin/gomplate https://github.com/hairyhenderson/gomplate/releases/download/v4.3.3/gomplate_linux-amd64 \
   && chmod +x /usr/bin/gomplate
+
+# install cfc
+COPY --from=builder /usr/local/cargo/bin/cfc /usr/bin/cfc
 
 RUN rm -rf /var/log/*
 

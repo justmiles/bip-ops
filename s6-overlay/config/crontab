@@ -1,7 +1,7 @@
 MAILTO=""
 
-* * * * *   /usr/bin/rsnapshot -c /etc/rsnapshot.conf latest >> /var/log/cron-latest.log 2>&1
-@hourly     /usr/bin/rsnapshot -c /etc/rsnapshot.conf hourly >> /var/log/cron-hourly.log 2>&1
-@hourly     /usr/bin/rsnapshot -c /etc/rsnapshot.conf daily  >> /var/log/cron-daily.log 2>&1
-@hourly     /usr/bin/rsnapshot -c /etc/rsnapshot.conf weekly >> /var/log/cron-weekly.log 2>&1
-* * * * *   date >> /var/log/cron3.log 2>&1
+* * * * *   /usr/bin/rsnapshot -c /etc/rsnapshot.conf latest
+@hourly     /usr/bin/rsnapshot -c /etc/rsnapshot.conf hourly
+@hourly     /usr/bin/rsnapshot -c /etc/rsnapshot.conf daily
+@hourly     /usr/bin/rsnapshot -c /etc/rsnapshot.conf weekly
+* * * * *   date

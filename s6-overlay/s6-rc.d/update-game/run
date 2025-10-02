@@ -1,4 +1,4 @@
 #!/command/with-contenv bash
 set -e
 
-/etc/s6-overlay/s6-rc.d/update-game/scripts/update-game.sh 2>&1 | s6-log -bp n3 pupdate-game 1 /var/log/update-game
+/etc/s6-overlay/s6-rc.d/update-game/scripts/update-game.sh 2>&1 | s6-log -bp n3 pinit 1 /var/log/init
