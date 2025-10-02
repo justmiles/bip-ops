@@ -2,5 +2,6 @@ game: Subsistence
 usewine: true
 usex: true
 steamid: 1362640
+backupdir: /game/UDKGame/SaveData
 configs:
   "config/UDKDedServerSettings.ini": /game/UDKGame/Config/DefaultDedServerSettings.ini

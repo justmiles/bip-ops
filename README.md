@@ -71,13 +71,9 @@ bipops/
 │   ├── sonsoftheforest/  # Sons of the Forest server
 │   │   ├── .bip-ops.yaml # Configuration
 │   │   ├── start.sh      # Server start script
-│   │   ├── backup.sh     # Backup script
-│   │   └── restore.sh    # Restore script
 │   └── subsistence/      # Subsistence server
 │       ├── .bip-ops.yaml # Configuration
 │       ├── start.sh      # Server start script
-│       ├── backup.sh     # Backup script
-│       └── restore.sh    # Restore script
 └── s6-rc.d/              # s6-overlay service definitions
     ├── backup-game/      # Backup service
     ├── configure-game/   # Configuration service
@@ -94,9 +90,6 @@ To add support for a new game server:
 2. Create a `.bip-ops.yaml` file with the game's configuration
 3. Create the necessary scripts:
    - `start.sh`: Script to start the game server
-   - `backup.sh`: (Optional) Script to backup game data
-   - `restore.sh`: (Optional) Script to restore game data
-   - `configure.sh`: (Optional) Script to configure the game server
 
 ## Ports
 
