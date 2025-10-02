@@ -1,7 +1,8 @@
 #!/command/with-contenv bash
 set -e
 
-echo "Update SteamCMD"
+
+echo "Updating steamcmd..."
 
 LOGIN="anonymous"
 if [ ! -z ${STEAM_USER+x} ] && [ ! -z ${STEAM_PASSWORD+x} ]; then
@@ -12,4 +13,4 @@ HOME=/home/bipops s6-setuidgid bipops /usr/lib/steamcmd/steamcmd.sh \
   +login $LOGIN \
   +quit
 
-echo "SteamCMD up to date!"
+echo "steamcmd up to date!"

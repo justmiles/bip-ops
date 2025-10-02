@@ -1,7 +1,7 @@
 #!/command/with-contenv bash
 set -e
 
-echo "Update Game Server"
+echo "Updating game..."
 
 GAME_ID=$(yq '.steamid' "/gameservers/$BIPOPS_GAMESERVER/.bip-ops.yaml")
 USE_WINE=$(yq '.usewine' "/gameservers/$BIPOPS_GAMESERVER/.bip-ops.yaml")
@@ -32,4 +32,4 @@ USER=bipops HOME=/home/bipops s6-setuidgid bipops /usr/lib/steamcmd/steamcmd.sh 
   +app_update ${APP_UPDATE} \
   +quit
 
-echo "Game Server up to date!"
+echo "Game up to date!"

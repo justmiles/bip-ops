@@ -116,3 +116,6 @@ To add support for a new game server:
   - figure out why Subsistence is overwriting configs on boot (this is mitigated as we are just editing the "default" config and letting it overwrite existing settings with our modified defaults)
 - SOFT:
   - backups
+- CLI: create a `bip-ops` cli to handle some admin tasks.
+  - backups: list available backups
+  - restore: restore from a backup

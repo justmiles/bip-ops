@@ -1,0 +1,6 @@
+#!/command/with-contenv bash
+
+chown bipops:bipops /etc/s6-overlay/config/crontab
+crontab -u bipops /etc/s6-overlay/config/crontab
+
+/usr/sbin/cron -f -L 5 2>&1 | s6-log -bp n3 pcron 1 /var/log/cron

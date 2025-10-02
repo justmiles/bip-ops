@@ -1,9 +1,0 @@
-#!/command/with-contenv bash
-
-USEX=$(yq '.usex' "/gameservers/$BIPOPS_GAMESERVER/.bip-ops.yaml")
-
-if [ "$USEX" == "true" ]; then
-  s6-setuidgid bipops xpra start :99 --bind-tcp=0.0.0.0:7756 --no-daemon --mdns=no --webcam=no --pulseaudio=no --start="xhost +"
-else
-  exec /bin/true
-fi

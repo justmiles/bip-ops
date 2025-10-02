@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install basic Apt Packages
 RUN apt-get update \
-  && apt-get install -y \
+  && apt-get install -y --no-install-recommends \
   busybox \
   curl \
   tar \
@@ -14,6 +14,8 @@ RUN apt-get update \
   gnupg \
   locales \
   yq \
+  rsnapshot \
+  cron \
   ca-certificates \
   lib32gcc-s1 lib32stdc++6 lib32z1 \
   && apt-get clean autoclean \
@@ -71,8 +73,12 @@ RUN curl -sfLo - http://media.steampowered.com/client/steamcmd_linux.tar.gz | ta
 RUN curl -sfLo /usr/bin/gomplate https://github.com/hairyhenderson/gomplate/releases/download/v4.3.3/gomplate_linux-amd64 \
   && chmod +x /usr/bin/gomplate
 
+RUN rm -rf /var/log/*
+
 # Copy s6-overlay configs
-COPY s6-rc.d /etc/s6-overlay/s6-rc.d
+COPY s6-overlay /etc/s6-overlay
+
+# COPY s6-rc.d/cron/cron.d /etc/cron.d
 COPY gameservers /gameservers
 
 # Copy bip-ops
@@ -92,7 +98,8 @@ ENV BIPOPS_GAMESERVER=NONE \
     BIPOPS_UID=1000 \
     BIPOPS_GID=1000 \
     BIPOPS_BACKUP_INTERVAL=3600 \
-    BIPOPS_VALIDATE_SERVER_FILES=true
+    BIPOPS_VALIDATE_SERVER_FILES=true \
+    BIPOPS_XSERVER=xvfb
 
 # Expose Xpra web server for games that require an X display
 EXPOSE 7756

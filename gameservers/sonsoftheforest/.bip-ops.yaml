@@ -2,6 +2,7 @@ game: Sons of The Forest
 usewine: true
 usex: true
 steamid: 2465200
+backupdir: /backups/current/Saves/
 configs:
-  "config/dedicatedserver.cfg": "/userdata/dedicatedserver.cfg"
-  "config/ownerswhitelist.txt": "/userdata/ownerswhitelist.txt"
+  "config/dedicatedserver.cfg": "/backups/current/dedicatedserver.cfg"
+  "config/ownerswhitelist.txt": "/backups/current/ownerswhitelist.txt"
