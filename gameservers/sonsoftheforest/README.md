@@ -13,7 +13,6 @@ docker run --rm -it --name bip-ops \
   -p 9700:9700/udp \
   -p 27016:27016/udp \
   -v /path/to/gameservers/sonsoftheforest/game:/game \
-  -v /path/to/gameservers/sonsoftheforest/saves:/backups/current/Saves \
   -v /path/to/gameservers/sonsoftheforest/backups:/backups \
   justmiles/bip-ops
 ```
@@ -28,11 +27,10 @@ docker run --rm -it --name bip-ops \
 
 ## Volumes
 
-| Path                   | Description                         |
-| ---------------------- | ----------------------------------- |
-| /game                  | Cache for the gameserver files      |
-| /backups/current/Saves | Current game save data              |
-| /backups               | Storage for older game save backups |
+| Path     | Description                         |
+| -------- | ----------------------------------- |
+| /game    | Cache for the gameserver files      |
+| /backups | Storage for older game save backups |
 
 ## Configuration
 

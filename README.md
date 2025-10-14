@@ -60,7 +60,6 @@ docker pull justmiles/bipops
 - `STEAM_USER`: (Optional) Steam username for non-anonymous downloads
 - `STEAM_PASSWORD`: (Optional) Steam password
 - `BIPOPS_VALIDATE_SERVER_FILES`: (Optional) Set to "true" to validate game files at launch
-- `BIPOPS_BACKUP_INTERVAL`: (Optional) Backup interval in seconds (default: 3600)
 - `BIPOPS_XSERVER`: (Optional) X server type for games requiring display (default: "xvfb")
 
 ## Game Server Configuration
@@ -77,37 +76,6 @@ configs: # Configuration file mappings
   "config/file.ini": "/game/path/to/file.ini"
 ```
 
-## Directory Structure
-
-```
-bipops/
-├── Dockerfile            # Container definition
-├── bip-ops.sh            # Main entry script
-├── gameservers/          # Game-specific configurations and scripts
-│   ├── palworld/         # Palworld server
-│   │   ├── .bip-ops.yaml # Configuration
-│   │   ├── start.sh      # Server start script
-│   │   ├── README.md     # Game-specific documentation
-│   │   └── config/       # Configuration templates
-│   ├── sonsoftheforest/  # Sons of the Forest server
-│   │   ├── .bip-ops.yaml # Configuration
-│   │   ├── start.sh      # Server start script
-│   │   ├── README.md     # Game-specific documentation
-│   │   └── config/       # Configuration templates
-│   └── subsistence/      # Subsistence server
-│       ├── .bip-ops.yaml # Configuration
-│       ├── start.sh      # Server start script
-│       ├── README.md     # Game-specific documentation
-│       └── config/       # Configuration templates
-└── s6-overlay/           # s6-overlay service definitions
-    └── s6-rc.d/          # Service configurations
-        ├── backup-game/  # Backup service
-        ├── configure-game/ # Configuration service
-        ├── update-game/  # Game update service
-        ├── update-steamcmd/ # SteamCMD update service
-        └── xpra/         # Xpra service
-```
-
 ## Adding New Game Servers
 
 To add support for a new game server:
@@ -117,30 +85,77 @@ To add support for a new game server:
 3. Create the necessary scripts:
    - `start.sh`: Script to start the game server
 
-## Ports
+```
+bipops/
+└── gameservers/             # Server-specific configurations and scripts
+    └── newgameserver/
+        ├── .bip-ops.yaml    # BipOps configuration file
+        ├── start.sh         # Server-specific startup script
+        ├── README.md        # Server-specific documentation
+        └── config/          # Server-specific configuration templates
+```
 
-The ports used depend on the game server being run:
+### BipOps Configuration File
 
-### Palworld
+The `.bip-ops.yaml` file defines the configuration for each game server. This file must be placed in each game server's directory and contains essential settings for proper server operation.
 
-- **8211/udp**: Game connection port
-- **8212/tcp**: REST API port
-- **25575/tcp**: RCON port
+- **game**: The display name of the game server
+- **usewine**: Boolean flag indicating whether to use Wine for Windows games on Linux (`true`/`false`)
+- **usex**: Boolean flag indicating whether to use X11 display server for games requiring GUI (`true`/`false`)
+- **steamid**: The Steam Application ID for the game (used by SteamCMD for downloads)
+- **backupdir**: Directory path within the container where game saves and data are stored
+- **configs**: Key/value mapping of configuration template files to their rendered locations within the container
 
-### Sons of the Forest
+#### Configuration Templates
 
-- **8766/udp**: Game connection port
-- **9700/udp**: Blob sync port
-- **27016/udp**: Steam query port
+The `configs` section maps template files from your game server's configs to their destination paths inside the running container.
 
-### Subsistence
+**Template mapping format:**
 
-- **7777/udp**: Game server port
-- **27015/udp**: Steam query port
+```yaml
+configs:
+  "local/template/path": "/container/destination/path"
+```
 
-### Common
+#### Examples
 
-- **7756/tcp**: Xpra web access port (if enabled)
+**Linux Native Game (Palworld):**
+
+```yaml
+game: Palworld
+usewine: false
+usex: false
+steamid: 2394010
+backupdir: /game/Pal/Saved/
+configs:
+  "config/PalWorldSettings.ini": "/game/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini"
+  "config/Engine.ini": "/game/Pal/Saved/Config/LinuxServer/Engine.ini"
+```
+
+**Windows Game with GUI (Sons of The Forest):**
+
+```yaml
+game: Sons of The Forest
+usewine: true
+usex: true
+steamid: 2465200
+backupdir: /backups/current/Saves/
+configs:
+  "config/dedicatedserver.cfg": "/backups/current/dedicatedserver.cfg"
+  "config/ownerswhitelist.txt": "/backups/current/ownerswhitelist.txt"
+```
+
+**Windows Game without GUI (Subsistence):**
+
+```yaml
+game: Subsistence
+usewine: true
+usex: false
+steamid: 1362640
+backupdir: /game/UDKGame/SaveData
+configs:
+  "config/UDKDedServerSettings.ini": "/game/UDKGame/Config/DefaultDedServerSettings.ini"
+```
 
 ## Troubleshooting
 
@@ -157,16 +172,6 @@ The ports used depend on the game server being run:
 - Set `BIPOPS_VALIDATE_SERVER_FILES=true` to force validation
 - Provide Steam credentials if the game requires authentication
 
-**X11 display issues:**
-
-- For games requiring X11 (usex: true), ensure `BIPOPS_XSERVER` is set appropriately
-- Check that the Xpra service is running if using xpra mode
-
-**Backup issues:**
-
-- Verify backup directory has proper permissions
-- Check `BIPOPS_BACKUP_INTERVAL` setting (default: 3600 seconds)
-
 ### Logs
 
 View container logs:
@@ -175,10 +180,10 @@ View container logs:
 docker logs bipops-palworld
 ```
 
-View game server logs:
+View detailed process logs:
 
 ```bash
-docker exec bipops-palworld tail -f /var/log/gameserver/current
+docker exec bipops-palworld tail -f /var/log/*/current
 ```
 
 ## Features
@@ -197,7 +202,6 @@ docker exec bipops-palworld tail -f /var/log/gameserver/current
 ### Completed ✅
 
 - ✅ Include `BIPOPS_XSERVER` environment variable with options `xpra`, or `xvfb` (default `xvfb`)
-- ✅ Set backup interval as environment variable (`BIPOPS_BACKUP_INTERVAL`)
 - ✅ Add `bipops` user and limit root usage
 - ✅ Add Palworld support
 
