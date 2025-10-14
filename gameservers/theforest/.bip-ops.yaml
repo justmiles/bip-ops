@@ -1,0 +1,7 @@
+game: The Forest
+usewine: true
+usex: true
+steamid: 556450
+backupdir: /backups/current/Multiplayer/
+configs:
+  "config/server.cfg": "/backups/current/server.cfg"
