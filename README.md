@@ -15,9 +15,10 @@ BipOps provides a standardized Docker-based environment for running various game
 
 Currently, BipOps supports the following games:
 
-- **Palworld** - [quickstart here](./gameservers/palworld/README.md)
-- **Sons of the Forest** - [quickstart here](./gameservers/sonsoftheforest/README.md)
-- **Subsistence** - [quickstart here](./gameservers/subsistence/README.md)
+- [**Palworld**](./gameservers/palworld/README.md)
+- [**The Forest**](./gameservers/theforest/README.md)
+- [**Sons of the Forest**](./gameservers/sonsoftheforest/README.md)
+- [**Subsistence**](./gameservers/subsistence/README.md)
 
 Each game has its own configuration and management scripts.
 
@@ -157,81 +158,15 @@ configs:
   "config/UDKDedServerSettings.ini": "/game/UDKGame/Config/DefaultDedServerSettings.ini"
 ```
 
-## Troubleshooting
-
-### Common Issues
-
-**Server won't start:**
-
-- Ensure `BIPOPS_GAMESERVER` is set to a supported game (palworld, subsistence, sonsoftheforest)
-- Check that required ports are not already in use
-- Verify volume mounts are properly configured
-
-**Game files not updating:**
-
-- Set `BIPOPS_VALIDATE_SERVER_FILES=true` to force validation
-- Provide Steam credentials if the game requires authentication
-
-### Logs
-
-View container logs:
-
-```bash
-docker logs bipops-palworld
-```
-
-View detailed process logs:
-
-```bash
-docker exec bipops-palworld tail -f /var/log/*/current
-```
-
-## Features
-
-- **Multi-game Support**: Currently supports Palworld, Sons of the Forest, and Subsistence
-- **Automated Backups**: Configurable backup intervals with rsnapshot
-- **Steam Integration**: Automatic game updates via SteamCMD
-- **Wine Support**: Run Windows games on Linux containers
-- **X11 Display Support**: Virtual display support for games requiring GUI
-- **Service Management**: Robust process management with s6-overlay
-- **Configuration Management**: Environment-based configuration with template support
-- **RCON Support**: Remote administration for supported games
-
 ## ROADMAP
 
-### Completed ✅
-
-- ✅ Include `BIPOPS_XSERVER` environment variable with options `xpra`, or `xvfb` (default `xvfb`)
-- ✅ Add `bipops` user and limit root usage
-- ✅ Add Palworld support
-
-### In Progress 🚧
-
-- 🚧 Add CI/CD pipeline
-- 🚧 Add additional Steam games
-- 🚧 Add non-Steam games
-
-### Planned 📋
-
-- 📋 Add support for manual config files via environment variable `BIPOPS_MANUAL_CONFIG=true`
-- 📋 CLI: create a `bip-ops` cli to handle admin tasks:
+- Add CI/CD pipeline
+- Add additional Steam games
+- Add non-Steam games
+- Add support for manual config files via environment variable `BIPOPS_MANUAL_CONFIG=true`
+- CLI: create a `bip-ops` cli to handle admin tasks:
   - backups: list available backups
   - restore: restore from a backup
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-### Adding New Game Support
-
-To add support for a new game:
-
-1. Create a new directory under `gameservers/` with the game's name
-2. Create a `.bip-ops.yaml` configuration file
-3. Create a `start.sh` script to launch the game server
-4. Create a `README.md` with game-specific documentation
-5. Add configuration templates in the `config/` directory
-6. Test thoroughly and update this README
 
 ## License
 
