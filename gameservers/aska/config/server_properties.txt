@@ -5,7 +5,7 @@
 //customization will be ignored, moreover, when creating a new save the 
 //save id will be filled in by the server once the session opens so to be able to
 //seemlesly load this save again after the first time
-save id = {{getenv "ASKA_SAVE_ID" "bipops_slot_1"}}
+save id = {{getenv "ASKA_SAVE_ID" ""}}
 
 //display name is the name the session displays in the session list for new saves,
 //for old saves it will take the name from the save itself
