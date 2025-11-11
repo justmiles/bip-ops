@@ -1,0 +1,7 @@
+game: Aska
+usewine: true
+usex: true
+steamid: 3246670
+backupdir: /game/.wine/drive_c/users/bipops/AppData/LocalLow/Sand Sailor Studio/Aska/data/server
+configs:
+  "config/server_properties.txt": "/game/server_properties.txt"
