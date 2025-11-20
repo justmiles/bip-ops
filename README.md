@@ -161,12 +161,16 @@ configs:
 ## ROADMAP
 
 - Add CI/CD pipeline
-- Add additional Steam games
 - Add non-Steam games
 - Add support for manual config files via environment variable `BIPOPS_MANUAL_CONFIG=true`
 - CLI: create a `bip-ops` cli to handle admin tasks:
   - backups: list available backups
   - restore: restore from a backup
+- Add prometheus exporter to S6 with bipops config for exporter type
+  - a2s: https://github.com/armsnyder/a2s-exporter (theforest, sonsoftheforest, aska? subsistence?)
+  - https://github.com/palworldlol/palworld-exporter (palworld)
+- Add healthiness check (aska disconnects without exiting) or event hooks to restart the server
+- rename "game" to "server" to avoid confusion with game clients.
 
 ## License
 

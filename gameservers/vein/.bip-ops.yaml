@@ -1,0 +1,8 @@
+game: VEIN
+usewine: false
+usex: false
+steamid: 2131400
+backupdir: /game/Vein/Saved/SaveGames
+configs:
+  "config/Engine.ini": "/game/Vein/Saved/Config/LinuxServer/Engine.ini"
+  "config/Game.ini": "/game/Vein/Saved/Config/LinuxServer/Game.ini"
