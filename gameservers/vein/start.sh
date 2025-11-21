@@ -5,7 +5,7 @@ set -e
 
 cd /game
 
-export SteamAppId=1898300
+export SteamAppId=1857950
 export WINEPREFIX="/game/.wine"
 
 [ -f ./Vein/Binaries/Linux/steamclient.so ] || ln -s /usr/lib/steamcmd/linux64/steamclient.so ./Vein/Binaries/Linux/steamclient.so
