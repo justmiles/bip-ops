@@ -1,0 +1,8 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers-extra/features/podman-homebrew:1": {}
+    },
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y uidmap"
+}

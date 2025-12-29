@@ -1,0 +1,7 @@
+game: Starbound
+usewine: false
+usex: false
+steamid: 211820
+backupdir: /game/storage
+configs:
+  "config/starbound_server.config": "/game/storage/starbound_server.config"

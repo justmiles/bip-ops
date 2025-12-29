@@ -33,6 +33,14 @@ function updateServer {
     +login ${LOGIN} \
     +app_update ${APP_UPDATE} \
     +quit
+
+  BYTES_DOWNLOADED=$(grep 'BytesDownloaded' steamapps/appmanifest_$GAME_ID.acf | awk '{print $2}' | tr -d '"')
+  if [ "${BYTES_DOWNLOADED}" -eq 0 ]; then
+    echo "Install/Update failed. Bytes downloaded: ${BYTES_DOWNLOADED}"
+    echo "Ensure your STEAM_USER and STEAM_PASSWORD are correct."
+    echo 1 > /run/s6-linux-init-container-results/exitcode
+    /run/s6/basedir/bin/halt
+  fi
 }
 
 # Check for updates
