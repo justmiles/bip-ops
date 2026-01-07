@@ -19,6 +19,7 @@ Currently, BipOps supports the following games:
 - [**The Forest**](./gameservers/theforest/README.md)
 - [**Sons of the Forest**](./gameservers/sonsoftheforest/README.md)
 - [**Subsistence**](./gameservers/subsistence/README.md)
+- [**StarRupture**](./gameservers/starrupture/README.md)
 
 Each game has its own configuration and management scripts.
 

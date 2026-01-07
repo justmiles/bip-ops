@@ -15,6 +15,7 @@ RUN apt-get update \
   locales \
   yq \
   rsnapshot \
+  cabextract \
   cron \
   ca-certificates \
   lib32gcc-s1 lib32stdc++6 lib32z1 \

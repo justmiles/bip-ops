@@ -23,6 +23,7 @@ description: Add a new game server to BipOps
 
 5. Create README.md
    - Create `gameservers/<NEWGAMESERVER>/README.md` - documentation for the game server including all available environment variables.
+   - Readme should contain a quickstart example for how to run the gameserver using `docker`
 
 6. Review examples
    - Review existing `gameservers/` for examples.
