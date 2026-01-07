@@ -1,14 +1,12 @@
-IMAGE_NAME := bip-ops
-REGISTRY := docker.io/justmiles
 TAG := latest
 
 .PHONY: build publish all
 
 build:
-	podman build -t localhost/$(IMAGE_NAME):$(TAG) .
+	podman build -t justmiles/bip-ops:latest .
 
 publish: build
-	podman tag localhost/$(IMAGE_NAME):$(TAG) $(REGISTRY)/$(IMAGE_NAME):$(TAG)
-	podman push $(REGISTRY)/$(IMAGE_NAME):$(TAG)
+	podman tag justmiles/bip-ops:latest justmiles/bip-ops:$(TAG)
+	podman push justmiles/bip-ops:$(TAG)
 
 all: build publish

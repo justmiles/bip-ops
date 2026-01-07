@@ -2,8 +2,8 @@
 description: Build and verify the game server docker image
 ---
 
-1. Build the docker image
+1. Build the docker image with podman
 // turbo
 ```bash
-podman build -t bip-ops:latest .
+make build
 ```
