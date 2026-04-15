@@ -1,0 +1,8 @@
+game: HumanitZ
+usewine: false
+usex: false
+steamid: 2728330
+steambranch: linuxbranch
+backupdir: /game/HumanitZServer/
+configs:
+  "config/GameServerSettings.ini": "/game/HumanitZServer/GameServerSettings.ini"

@@ -16,6 +16,7 @@ BipOps provides a standardized Docker-based environment for running various game
 Currently, BipOps supports the following games:
 
 - [**Palworld**](./gameservers/palworld/README.md)
+- [**HumanitZ**](./gameservers/humanitz/README.md)
 - [**The Forest**](./gameservers/theforest/README.md)
 - [**Sons of the Forest**](./gameservers/sonsoftheforest/README.md)
 - [**Subsistence**](./gameservers/subsistence/README.md)
