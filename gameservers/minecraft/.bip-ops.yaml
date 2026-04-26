@@ -1,0 +1,8 @@
+game: Minecraft
+usewine: false
+usex: false
+steamid: 0
+backupdir: /game/world
+configs:
+  "config/server.properties": "/game/server.properties"
+  "config/eula.txt": "/game/eula.txt"

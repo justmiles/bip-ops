@@ -1,0 +1,7 @@
+game: Necesse
+usewine: false
+usex: false
+steamid: 1169370
+backupdir: /home/bipops/.config/Necesse/saves
+configs:
+  "config/server.cfg": "/home/bipops/.config/Necesse/cfg/server.cfg"

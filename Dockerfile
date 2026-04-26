@@ -77,6 +77,9 @@ RUN curl -sfLo /usr/bin/gomplate https://github.com/hairyhenderson/gomplate/rele
 # install ofelia
 RUN curl -sfLo - https://github.com/mcuadros/ofelia/releases/download/v0.3.19/ofelia_0.3.19_linux_amd64.tar.gz | tar -xzf - -C /usr/bin ofelia
 
+# Install devbox for per-game system dependencies
+RUN curl -fsSL https://get.jetify.com/devbox | bash -s -- -f
+
 RUN rm -rf /var/log/*
 
 # Copy s6-overlay configs

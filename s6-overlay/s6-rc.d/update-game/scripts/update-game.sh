@@ -3,8 +3,38 @@ set -e
 
 echo "Updating game..."
 
+# Install per-game system dependencies via devbox (if devbox.json exists)
+GAME_DIR="/gameservers/$BIPOPS_GAMESERVER"
+HAS_DEVBOX=false
+if [ -f "$GAME_DIR/devbox.json" ]; then
+  echo "Installing game dependencies via devbox..."
+  cd "$GAME_DIR"
+  devbox install
+  HAS_DEVBOX=true
+  cd /game
+fi
+
 # Read game metadata from the game server's .bip-ops.yaml config
 GAME_ID=$(yq '.steamid' "/gameservers/$BIPOPS_GAMESERVER/.bip-ops.yaml")
+
+# Non-Steam games: use custom install script instead of SteamCMD
+if [ "$GAME_ID" == "0" ] || [ "$GAME_ID" == "null" ]; then
+  echo "Non-Steam game — running custom install script..."
+  if [ -f "$GAME_DIR/install.sh" ]; then
+    if [ "$HAS_DEVBOX" == "true" ]; then
+      cd "$GAME_DIR"
+      USER=bipops HOME=/home/bipops s6-setuidgid bipops \
+        devbox run -- "$GAME_DIR/install.sh"
+    else
+      USER=bipops HOME=/home/bipops s6-setuidgid bipops \
+        "$GAME_DIR/install.sh"
+    fi
+  else
+    echo "No install.sh found for non-Steam game $BIPOPS_GAMESERVER — skipping"
+  fi
+  exit 0
+fi
+
 USE_WINE=$(yq '.usewine' "/gameservers/$BIPOPS_GAMESERVER/.bip-ops.yaml")
 # Optional: some games require a specific Steam beta branch (e.g. HumanitZ needs "linuxbranch")
 # Use -r for raw output to avoid yq wrapping the string value in quotes

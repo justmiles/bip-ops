@@ -45,4 +45,11 @@ if [ "$USEX" == "true" ]; then
 
 fi
 
-USER=bipops HOME=/home/bipops s6-setuidgid bipops /gameservers/$BIPOPS_GAMESERVER/start.sh 2>&1 | s6-log -bp n3 1 /var/log/gameserver
+if [ -f "/gameservers/$BIPOPS_GAMESERVER/devbox.json" ]; then
+  cd /gameservers/$BIPOPS_GAMESERVER
+  USER=bipops HOME=/home/bipops s6-setuidgid bipops \
+    devbox run -- /gameservers/$BIPOPS_GAMESERVER/start.sh 2>&1 | s6-log -bp n3 1 /var/log/gameserver
+else
+  USER=bipops HOME=/home/bipops s6-setuidgid bipops \
+    /gameservers/$BIPOPS_GAMESERVER/start.sh 2>&1 | s6-log -bp n3 1 /var/log/gameserver
+fi

@@ -1,0 +1,1 @@
+eula={{getenv "MINECRAFT_EULA" "true"}}

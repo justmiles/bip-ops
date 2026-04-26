@@ -17,9 +17,12 @@ Currently, BipOps supports the following games:
 
 - [**Palworld**](./gameservers/palworld/README.md)
 - [**HumanitZ**](./gameservers/humanitz/README.md)
+- [**Minecraft**](./gameservers/minecraft/README.md)
+- [**Necesse**](./gameservers/necesse/README.md)
 - [**The Forest**](./gameservers/theforest/README.md)
 - [**Sons of the Forest**](./gameservers/sonsoftheforest/README.md)
 - [**Subsistence**](./gameservers/subsistence/README.md)
+- [**Starbound**](./gameservers/starbound/README.md)
 - [**StarRupture**](./gameservers/starrupture/README.md)
 
 Each game has its own configuration and management scripts.
