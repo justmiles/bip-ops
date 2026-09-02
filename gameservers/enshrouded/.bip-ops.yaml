@@ -1,0 +1,7 @@
+game: Enshrouded
+usewine: true
+usex: true
+steamid: 2278520
+backupdir: /game/savegame
+configs:
+  "config/enshrouded_server.json": "/game/enshrouded_server.json"
