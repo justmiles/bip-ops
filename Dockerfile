@@ -42,6 +42,11 @@ RUN dpkg --add-architecture i386 \
 RUN curl -sfLo /usr/bin/winetricks https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks \
   && chmod a+x /usr/bin/winetricks
 
+# Install GE-Proton for games that perform better under Proton than plain Wine (Enshrouded)
+ENV GE_PROTON_VERSION="GE-Proton9-27"
+RUN curl -sfLo - https://github.com/GloriousEggroll/proton-ge-custom/releases/download/${GE_PROTON_VERSION}/${GE_PROTON_VERSION}.tar.gz \
+  | tar -xzf - -C /opt
+
 # Add Xpra
 RUN apt-get update \
   && apt-get install -y wget gnupg xvfb x11-xserver-utils python3-pip \

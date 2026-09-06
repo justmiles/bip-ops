@@ -3,8 +3,9 @@
 This document describes the configuration options for the Enshrouded dedicated server.
 
 Enshrouded ships only a Windows server binary, so bip-ops runs `enshrouded_server.exe`
-under Wine. The rendered `enshrouded_server.json` is placed at `/game/enshrouded_server.json`
-and read from the working directory at launch.
+under GE-Proton (rather than plain Wine, which suffers from high CPU load and poor
+performance for this title). The rendered `enshrouded_server.json` is placed at
+`/game/enshrouded_server.json` and read from the working directory at launch.
 
 ## Quickstart
 
