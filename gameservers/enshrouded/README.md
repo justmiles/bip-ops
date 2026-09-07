@@ -3,8 +3,12 @@
 This document describes the configuration options for the Enshrouded dedicated server.
 
 Enshrouded ships only a Windows server binary, so bip-ops runs `enshrouded_server.exe`
-under GE-Proton (rather than plain Wine, which suffers from high CPU load and poor
-performance for this title). The rendered `enshrouded_server.json` is placed at
+under the Wine build bundled with GE-Proton (wine-9.0 Staging with esync/fsync), which
+avoids the high CPU load and poor performance the distro Wine suffers with this title.
+It invokes GE-Proton's Wine binary directly rather than the `proton` wrapper: `proton run`
+routes Steamworks through its lsteamclient shim, which requires a running Steam client and
+crashes a headless dedicated server, so start.sh disables lsteamclient and lets the game
+use its own bundled Steamworks SDK. The rendered `enshrouded_server.json` is placed at
 `/game/enshrouded_server.json` and read from the working directory at launch.
 
 ## Quickstart
