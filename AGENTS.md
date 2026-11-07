@@ -63,7 +63,7 @@ Create the following in `gameservers/<NEWGAMESERVER>/`:
    - Shebang: `#!/bin/bash` with `set -e`
    - `cd /game` first
    - For Wine games: `export WINEPREFIX="/game/.wine"` and set `SteamAppId`
-   - Launch the game binary (native or via `wine`)
+   - Launch the game binary (native, or via Wine — see **Windows Runtime Strategy** below to pick the Wine build)
    - This script runs as the `bipops` user (not root) — `bip-ops.sh` handles the `s6-setuidgid`
    - Command-line flags and conditional logic can be driven by environment variables
 
@@ -92,6 +92,46 @@ Create the following in `gameservers/<NEWGAMESERVER>/`:
 | `sonsoftheforest` | ✓ | ✓ | Wine + GUI | Simple JSON-style `.cfg` config, multiple config files |
 | `subsistence` | ✓ | ✓ | Wine + GUI | Log file monitoring in background, minimal config |
 | `theforest` | ✓ | ✓ | Wine + GUI | Simplest example, single config file |
+| `enshrouded` | ✓ (GE-Proton) | ✓ | Wine + GUI | Opt-in GE-Proton Wine for CPU perf; lsteamclient disabled for headless Steamworks |
+
+### Windows Runtime Strategy (distro Wine vs GE-Proton Wine)
+
+For `usewine: true` games there are two runtime strategies. Pick per game; do **not**
+standardize on GE-Proton (see trade-offs).
+
+| Strategy | When to use | How |
+|----------|-------------|-----|
+| **distro Wine** (default) | Any Windows game whose performance is acceptable. This is the default — use it unless a game has a *demonstrated* problem. | Call bare `wine` / `wine64` (no `PATH` changes); `export WINEPREFIX="/game/.wine"`. |
+| **GE-Proton Wine** (opt-in) | A specific title has a *measured* CPU/perf problem under distro Wine (e.g. Enshrouded's high CPU load). | Call GE-Proton's Wine binary directly: `/opt/${GE_PROTON_VERSION}/files/bin/wine64` — **not** `proton run`. See `gameservers/enshrouded/start.sh` for the reference implementation. |
+
+GE-Proton Wine is the patched Wine build (wine-9.0 Staging + esync/fsync) shipped inside
+the GE-Proton install; only its `files/bin/wine64` binary is used, not the `proton` wrapper.
+
+**Critical caveat for Steam games on GE-Proton Wine:** GE-Proton's Wine bundles the
+`lsteamclient` shim as a builtin and its default prefix routes Steamworks through it.
+`lsteamclient` requires a **running Steam client**, so a headless dedicated server crashes
+at Steamworks init (`Assertion failed ... src-lsteamclient/steamclient_main.c`). Neutralize
+it so the game uses its own bundled `steamclient64.dll` instead:
+
+- `export WINEDLLOVERRIDES="lsteamclient=d"`
+- after `wineboot --init`: `find "$WINEPREFIX" -iname lsteamclient.dll -delete`
+- and `wine64 reg delete "HKCU\\Software\\Valve\\Steam\\ActiveProcess" /f`
+
+Also set `export PATH="/opt/${GE_PROTON_VERSION}/files/bin:${PATH}"` and
+`export LD_LIBRARY_PATH="/opt/${GE_PROTON_VERSION}/files/lib64:/opt/${GE_PROTON_VERSION}/files/lib:${LD_LIBRARY_PATH}"`
+so the GE-Proton Wine finds its own runtime libraries.
+
+**Trade-offs (why GE-Proton Wine is opt-in, not the default):**
+
+- Every Steam game needs the lsteamclient neutralization above or it crashes — it is not a drop-in swap.
+- Per-start `wineboot --init` + cleanup adds startup latency; switching Wine builds forces a prefix rebuild.
+- `winetricks` is fiddly against a Proton-flavored prefix (e.g. `starrupture` installs `vcrun2022`).
+- No benefit for a game that already runs fine — only regression risk.
+
+**Do not use the `proton run` wrapper for headless servers.** It forces the Steam Linux
+Runtime + lsteamclient path, which needs a running Steam client and `bwrap`/user namespaces
+that Docker's default seccomp profile blocks. `umu-launcher` was evaluated and does not solve
+the Steamworks-headless problem either.
 
 ### Checklist
 

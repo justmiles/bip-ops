@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.17.3/.schema/devbox.schema.json",
+  "packages": [
+    "gnumake@latest",
+    "gomplate@latest",
+    "yq-go@latest",
+    "jq@latest",
+    "shellcheck@latest",
+    "shfmt@latest",
+    "git@latest",
+    "curl@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'BipOps runtime (bip-ops) development environment'",
+      "echo ''",
+      "echo 'Image build uses docker via the Makefile (docker from the host).'",
+      "echo ''",
+      "echo 'Available scripts:'",
+      "echo '  devbox run build    - Build justmiles/bipops:latest (docker)'",
+      "echo '  devbox run publish  - Build, tag, and push (TAG=<tag>)'",
+      "echo '  devbox run lint     - shellcheck all shell scripts'",
+      "echo '  devbox run fmt      - shfmt -w all shell scripts'",
+      "echo ''"
+    ],
+    "scripts": {
+      "build": [
+        "make build"
+      ],
+      "publish": [
+        "make publish"
+      ],
+      "lint": [
+        "shellcheck bip-ops.sh gameservers/*/start.sh gameservers/*/shutdown.sh s6-overlay/**/*.sh 2>/dev/null || shellcheck bip-ops.sh gameservers/*/start.sh"
+      ],
+      "fmt": [
+        "shfmt -w bip-ops.sh gameservers/*/start.sh"
+      ]
+    }
+  }
+}
