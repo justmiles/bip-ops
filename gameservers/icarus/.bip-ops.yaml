@@ -1,0 +1,7 @@
+game: Icarus
+usewine: true
+usex: true
+steamid: 2089300
+backupdir: /game/Icarus/Saved
+configs:
+  "config/ServerSettings.ini": "/game/Icarus/Saved/Config/WindowsServer/ServerSettings.ini"

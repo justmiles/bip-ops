@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Icarus game server support (Windows dedicated server under Wine)
+
 
 ## [0.6.3] - 2026-09-07
 

@@ -25,6 +25,7 @@ Currently, BipOps supports the following games:
 - [**Starbound**](./gameservers/starbound/README.md)
 - [**StarRupture**](./gameservers/starrupture/README.md)
 - [**Enshrouded**](./gameservers/enshrouded/README.md)
+- [**Icarus**](./gameservers/icarus/README.md)
 
 Each game has its own configuration and management scripts.
 
