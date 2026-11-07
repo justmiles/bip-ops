@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.8.0] - 2026-11-07
+
+### Added
+
+- Counter-Strike 2 game server support (native 64-bit SRCDS, anonymous SteamCMD)
+- verify-gameserver readiness gate (boot a game server and confirm it binds a port)
+
+
 ## [0.7.0] - 2026-11-07
 
 ### Added
