@@ -1,0 +1,7 @@
+game: Counter-Strike 2
+usewine: false
+usex: false
+steamid: 730
+backupdir: /game/game/csgo/cfg
+configs:
+  "config/server.cfg": "/game/game/csgo/cfg/server.cfg"
