@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.9.0] - 2026-11-08
+
+### Added
+
+- Rust game server support (native 64-bit Linux dedicated server, anonymous SteamCMD)
+
+
 ## [0.8.0] - 2026-11-07
 
 ### Added
