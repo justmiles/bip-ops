@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.10.0] - 2026-11-08
+
+### Added
+
+- Team Fortress 2 game server support (native 64-bit SRCDS, anonymous SteamCMD)
+- Valheim game server support (native Linux dedicated server, anonymous SteamCMD)
+- Project Zomboid game server support (native Linux, bundled JRE, anonymous SteamCMD)
+- Satisfactory game server support (native Linux dedicated server, anonymous SteamCMD)
+- Barotrauma game server support (native 64-bit Linux, anonymous SteamCMD)
+- Killing Floor 2 game server support (native 64-bit Linux UE3, anonymous SteamCMD)
+
+
 ## [0.9.0] - 2026-11-08
 
 ### Added
