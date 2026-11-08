@@ -27,6 +27,7 @@ Currently, BipOps supports the following games:
 - [**Enshrouded**](./gameservers/enshrouded/README.md)
 - [**Icarus**](./gameservers/icarus/README.md)
 - [**Counter-Strike 2**](./gameservers/cs2/README.md)
+- [**Rust**](./gameservers/rust/README.md)
 
 Each game has its own configuration and management scripts.
 

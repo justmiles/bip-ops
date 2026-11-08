@@ -1,0 +1,7 @@
+game: Rust
+usewine: false
+usex: false
+steamid: 258550
+backupdir: /game/server/bipops
+configs:
+  "config/server.cfg": "/game/server/bipops/cfg/server.cfg"
