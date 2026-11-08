@@ -1,0 +1,8 @@
+game: Killing Floor 2
+usewine: false
+usex: false
+steamid: 232130
+backupdir: /game/KFGame/Config
+configs:
+  "config/LinuxServer-KFGame.ini": "/game/KFGame/Config/LinuxServer-KFGame.ini"
+  "config/KFWeb.ini": "/game/KFGame/Config/KFWeb.ini"

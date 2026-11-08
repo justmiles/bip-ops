@@ -1,0 +1,7 @@
+game: Satisfactory
+usewine: false
+usex: false
+steamid: 1690800
+backupdir: /game/.config/Epic/FactoryGame/Saved/
+configs:
+  "config/Game.ini": "/game/.config/Epic/FactoryGame/Saved/Config/LinuxServer/Game.ini"

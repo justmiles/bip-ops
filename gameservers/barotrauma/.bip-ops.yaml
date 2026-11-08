@@ -1,0 +1,7 @@
+game: Barotrauma
+usewine: false
+usex: false
+steamid: 1026340
+backupdir: "/game/.local/share/Daedalic Entertainment GmbH/Barotrauma"
+configs:
+  "config/serversettings.xml": "/game/.local/share/Daedalic Entertainment GmbH/Barotrauma/serversettings.xml"

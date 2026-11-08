@@ -28,6 +28,12 @@ Currently, BipOps supports the following games:
 - [**Icarus**](./gameservers/icarus/README.md)
 - [**Counter-Strike 2**](./gameservers/cs2/README.md)
 - [**Rust**](./gameservers/rust/README.md)
+- [**Team Fortress 2**](./gameservers/tf2/README.md)
+- [**Valheim**](./gameservers/valheim/README.md)
+- [**Project Zomboid**](./gameservers/projectzomboid/README.md)
+- [**Satisfactory**](./gameservers/satisfactory/README.md)
+- [**Barotrauma**](./gameservers/barotrauma/README.md)
+- [**Killing Floor 2**](./gameservers/killingfloor2/README.md)
 
 Each game has its own configuration and management scripts.
 

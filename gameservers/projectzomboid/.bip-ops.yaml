@@ -1,0 +1,7 @@
+game: Project Zomboid
+usewine: false
+usex: false
+steamid: 380870
+backupdir: /game/Zomboid/
+configs:
+  "config/server.ini": "/game/Zomboid/Server/servertest.ini"
