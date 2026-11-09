@@ -30,12 +30,18 @@ fi
 ICARUS_GAME_PORT=${ICARUS_GAME_PORT:-17777}
 ICARUS_QUERY_PORT=${ICARUS_QUERY_PORT:-27015}
 
+# Bind address. Icarus (Unreal Engine) binds to a single adapter; -MultiHome tells it
+# which. Bind all interfaces (0.0.0.0) so the server is reachable on whatever ephemeral
+# host port Nomad maps in; the port itself is set via ICARUS_GAME_PORT below.
+ICARUS_MULTIHOME=${ICARUS_MULTIHOME:-0.0.0.0}
+
 # Launch arguments. -log keeps the server console attached so output is captured.
 ARGS="-log"
+ARGS="$ARGS -MultiHome=$ICARUS_MULTIHOME"
 ARGS="$ARGS -PORT=$ICARUS_GAME_PORT"
 ARGS="$ARGS -QueryPort=$ICARUS_QUERY_PORT"
 
-echo "Starting Icarus Dedicated Server (game port $ICARUS_GAME_PORT, query port $ICARUS_QUERY_PORT)..."
+echo "Starting Icarus Dedicated Server (bind $ICARUS_MULTIHOME, game port $ICARUS_GAME_PORT, query port $ICARUS_QUERY_PORT)..."
 
 set -x
 exec wine /game/IcarusServer.exe $ARGS

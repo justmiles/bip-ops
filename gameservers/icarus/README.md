@@ -61,6 +61,7 @@ For details on each setting, see the
 | `ICARUS_JOIN_PASSWORD`                       | (empty)               | Password required to join the server                                     | any string       |
 | `ICARUS_ADMIN_PASSWORD`                      | (empty)               | Admin password for server management                                     | any string       |
 | `ICARUS_MAX_PLAYERS`                         | `8`                   | Maximum number of player slots                                           | integer          |
+| `ICARUS_MULTIHOME`                           | `0.0.0.0`             | Address the server binds to (all interfaces by default)                  | IP address       |
 | `ICARUS_GAME_PORT`                           | `17777`               | Game UDP port                                                            | integer          |
 | `ICARUS_QUERY_PORT`                          | `27015`               | Steam query UDP port                                                     | integer          |
 | `ICARUS_SHUTDOWN_IF_NOT_JOINED_FOR`          | `300.000000`          | Seconds to wait for a first join before shutting down (0 disables)       | number           |
