@@ -8,6 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.11.0] - 2026-11-08
+
+### Added
+
+- Insurgency: Sandstorm game server support (native Linux, SteamCMD appid 581330)
+- NEBULOUS: Fleet Command game server support (native Linux, SteamCMD appid 2353090)
+- Colony Survival game server support (native Linux, SteamCMD appid 748090)
+- Hurtworld game server support (native Linux, SteamCMD appid 405100)
+- Unturned game server support (native Linux, SteamCMD appid 1110390)
+- Mordhau game server support (native Linux, SteamCMD appid 629800)
+- Arma Reforger game server support (native Linux, SteamCMD appid 1874900)
+- Soulmask game server support (native Linux, SteamCMD appid 3017300)
+- Conan Exiles game server support (native Linux, SteamCMD appid 443030)
+- Nightingale game server support (native Linux, SteamCMD appid 3796810)
+- Operation: Harsh Doorstop game server support (native Linux, SteamCMD appid 950900)
+- Craftopia game server support (native Linux, SteamCMD appid 1670340)
+
+
 ## [0.10.0] - 2026-11-08
 
 ### Added
