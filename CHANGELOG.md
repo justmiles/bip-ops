@@ -8,6 +8,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.13.0] - 2026-11-09
+
+### Added
+
+- Garry's Mod game server support (Tier-2 32-bit Source/SRCDS, appid 4020)
+- Counter-Strike: Source game server support (Tier-2 32-bit SRCDS, appid 232330)
+- Day of Defeat: Source game server support (Tier-2 32-bit SRCDS, appid 232290)
+- Half-Life 2: Deathmatch game server support (Tier-2 32-bit SRCDS, appid 232370)
+- Half-Life Deathmatch: Source game server support (Tier-2 32-bit SRCDS, appid 255470)
+- Black Mesa game server support (Tier-2 32-bit SRCDS, appid 346680)
+- Fistful of Frags game server support (Tier-2 32-bit SRCDS, appid 295230)
+
+### Fixed
+
+- configure-game.sh quotes backup/config paths so game servers whose save dir
+  contains spaces (e.g. Wine AppData "Channel 3 Entertainment") no longer break
+  the rsnapshot configtest at boot
+
+
 ## [0.12.0] - 2026-11-09
 
 ### Added
