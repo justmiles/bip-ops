@@ -1,0 +1,7 @@
+game: "Insurgency: Sandstorm"
+usewine: false
+usex: false
+steamid: 581330
+backupdir: /game/Insurgency/Saved
+configs:
+  "config/Game.ini": "/game/Insurgency/Saved/Config/LinuxServer/Game.ini"

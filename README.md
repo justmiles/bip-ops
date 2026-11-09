@@ -34,6 +34,18 @@ Currently, BipOps supports the following games:
 - [**Satisfactory**](./gameservers/satisfactory/README.md)
 - [**Barotrauma**](./gameservers/barotrauma/README.md)
 - [**Killing Floor 2**](./gameservers/killingfloor2/README.md)
+- [**Insurgency: Sandstorm**](./gameservers/insurgencysandstorm/README.md)
+- [**NEBULOUS: Fleet Command**](./gameservers/nebulous/README.md)
+- [**Colony Survival**](./gameservers/colonysurvival/README.md)
+- [**Hurtworld**](./gameservers/hurtworld/README.md)
+- [**Unturned**](./gameservers/unturned/README.md)
+- [**Mordhau**](./gameservers/mordhau/README.md)
+- [**Arma Reforger**](./gameservers/armareforger/README.md)
+- [**Soulmask**](./gameservers/soulmask/README.md)
+- [**Conan Exiles**](./gameservers/conanexiles/README.md)
+- [**Nightingale**](./gameservers/nightingale/README.md)
+- [**Operation: Harsh Doorstop**](./gameservers/harshdoorstop/README.md)
+- [**Craftopia**](./gameservers/craftopia/README.md)
 
 Each game has its own configuration and management scripts.
 

@@ -1,0 +1,7 @@
+game: Craftopia
+usewine: false
+usex: false
+steamid: 1670340
+backupdir: /game/DedicatedServerSave
+configs:
+  "config/ServerSetting.ini": "/game/ServerSetting.ini"

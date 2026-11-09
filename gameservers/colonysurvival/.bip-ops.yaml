@@ -1,0 +1,7 @@
+game: Colony Survival
+usewine: false
+usex: false
+steamid: 748090
+backupdir: /game/gamedata/savegames
+configs:
+  "config/server.config.json": "/game/server.config.json"

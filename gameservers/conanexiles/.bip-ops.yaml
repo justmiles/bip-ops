@@ -1,0 +1,8 @@
+game: Conan Exiles
+usewine: false
+usex: false
+steamid: 443030
+backupdir: /game/ConanSandbox/Saved
+configs:
+  "config/ServerSettings.ini": "/game/ConanSandbox/Saved/Config/LinuxServer/ServerSettings.ini"
+  "config/Engine.ini": "/game/ConanSandbox/Saved/Config/LinuxServer/Engine.ini"

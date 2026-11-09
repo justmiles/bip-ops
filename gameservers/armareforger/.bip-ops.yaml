@@ -1,0 +1,7 @@
+game: Arma Reforger
+usewine: false
+usex: false
+steamid: 1874900
+backupdir: /game/profile
+configs:
+  "config/server.json": "/game/config/server.json"

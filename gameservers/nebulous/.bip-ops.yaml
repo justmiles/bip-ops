@@ -1,0 +1,7 @@
+game: "NEBULOUS: Fleet Command"
+usewine: false
+usex: false
+steamid: 2353090
+backupdir: /game/Saved
+configs:
+  "config/DedicatedServerConfig.xml": "/game/DedicatedServerConfig.xml"

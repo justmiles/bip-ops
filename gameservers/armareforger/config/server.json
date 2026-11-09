@@ -1,0 +1,38 @@
+{
+  "bindAddress": "{{getenv "ARMAREFORGER_BIND_ADDRESS" "0.0.0.0"}}",
+  "bindPort": {{getenv "ARMAREFORGER_GAME_PORT" "2001"}},
+  "publicAddress": "{{getenv "ARMAREFORGER_PUBLIC_ADDRESS" ""}}",
+  "publicPort": {{getenv "ARMAREFORGER_PUBLIC_PORT" (getenv "ARMAREFORGER_GAME_PORT" "2001")}},
+  "a2s": {
+    "address": "{{getenv "ARMAREFORGER_A2S_ADDRESS" "0.0.0.0"}}",
+    "port": {{getenv "ARMAREFORGER_QUERY_PORT" "17777"}}
+  },
+{{- if getenv "ARMAREFORGER_RCON_PASSWORD" }}
+  "rcon": {
+    "address": "{{getenv "ARMAREFORGER_RCON_ADDRESS" "0.0.0.0"}}",
+    "port": {{getenv "ARMAREFORGER_RCON_PORT" "19999"}},
+    "password": "{{getenv "ARMAREFORGER_RCON_PASSWORD"}}",
+    "permission": "{{getenv "ARMAREFORGER_RCON_PERMISSION" "admin"}}",
+    "maxClients": {{getenv "ARMAREFORGER_RCON_MAX_CLIENTS" "16"}}
+  },
+{{- end }}
+  "game": {
+    "name": "{{getenv "ARMAREFORGER_SERVER_NAME" "BipOps Arma Reforger Server"}}",
+    "password": "{{getenv "ARMAREFORGER_PASSWORD" ""}}",
+    "passwordAdmin": "{{getenv "ARMAREFORGER_ADMIN_PASSWORD" ""}}",
+    "scenarioId": "{{getenv "ARMAREFORGER_SCENARIO_ID" "{ECC61978EDCC2B5A}Missions/23_Campaign.conf"}}",
+    "maxPlayers": {{getenv "ARMAREFORGER_MAX_PLAYERS" "64"}},
+    "visible": {{getenv "ARMAREFORGER_VISIBLE" "true"}},
+    "crossPlatform": {{getenv "ARMAREFORGER_CROSS_PLATFORM" "true"}},
+    "supportedPlatforms": [ "PLATFORM_PC"{{if eq (getenv "ARMAREFORGER_CROSS_PLATFORM" "true") "true"}}, "PLATFORM_XBL", "PLATFORM_PSN"{{end}} ],
+    "gameProperties": {
+      "serverMaxViewDistance": {{getenv "ARMAREFORGER_MAX_VIEW_DISTANCE" "1600"}},
+      "serverMinGrassDistance": {{getenv "ARMAREFORGER_MIN_GRASS_DISTANCE" "50"}},
+      "networkViewDistance": {{getenv "ARMAREFORGER_NETWORK_VIEW_DISTANCE" "1500"}},
+      "battlEye": {{getenv "ARMAREFORGER_BATTLEYE" "true"}},
+      "disableThirdPerson": {{getenv "ARMAREFORGER_DISABLE_THIRD_PERSON" "false"}},
+      "fastValidation": {{getenv "ARMAREFORGER_FAST_VALIDATION" "true"}},
+      "VONCanTransmitCrossFaction": {{getenv "ARMAREFORGER_VON_CROSS_FACTION" "false"}}
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+    "Browser": {
+        "Icon": "{{getenv "UNTURNED_BROWSER_ICON" ""}}",
+        "Desc_Hint": "{{getenv "UNTURNED_DESCRIPTION" "An Unturned server hosted with BipOps"}}",
+        "Desc_Full": "{{getenv "UNTURNED_DESCRIPTION" "An Unturned server hosted with BipOps"}}",
+        "Thumbnail": "{{getenv "UNTURNED_BROWSER_THUMBNAIL" ""}}"
+    },
+    "Server": {
+        "VAC_Secure": {{getenv "UNTURNED_VAC_SECURE" "true"}},
+        "BattlEye_Secure": {{getenv "UNTURNED_BATTLEYE_SECURE" "true"}},
+        "Max_Ping_Milliseconds": {{getenv "UNTURNED_MAX_PING_MS" "1000"}},
+        "Login_Token": "{{getenv "UNTURNED_GSLT" ""}}"
+    },
+    "Gameplay": {
+        "PvP": {{getenv "UNTURNED_PVP" "true"}},
+        "Gold": false,
+        "Timer_Home": {{getenv "UNTURNED_TIMER_HOME" "5"}},
+        "Timer_Respawn": {{getenv "UNTURNED_TIMER_RESPAWN" "5"}}
+    }
+}

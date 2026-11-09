@@ -1,0 +1,8 @@
+game: Unturned
+usewine: false
+usex: false
+steamid: 1110390
+backupdir: /game/Servers/bipops
+configs:
+  "config/Commands.dat": "/game/Servers/bipops/Server/Commands.dat"
+  "config/Config.json": "/game/Servers/bipops/Server/Config.json"

@@ -1,0 +1,7 @@
+game: Mordhau
+usewine: false
+usex: false
+steamid: 629800
+backupdir: /game/Mordhau/Saved
+configs:
+  "config/Game.ini": "/game/Mordhau/Saved/Config/LinuxServer/Game.ini"

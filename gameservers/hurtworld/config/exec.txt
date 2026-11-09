@@ -1,0 +1,16 @@
+host {{getenv "HURTWORLD_PORT" "12871"}}
+queryport {{getenv "HURTWORLD_QUERY_PORT" "12881"}}
+servername {{getenv "HURTWORLD_SERVER_NAME" "BipOps Hurtworld Server"}}
+maxplayers {{getenv "HURTWORLD_MAX_PLAYERS" "50"}}
+creativemode {{getenv "HURTWORLD_CREATIVE_MODE" "0"}}
+clantagsenabled {{getenv "HURTWORLD_CLAN_TAGS_ENABLED" "1"}}
+difficultygloballoot {{getenv "HURTWORLD_DIFFICULTY_LOOT" "1"}}
+antiCheat {{getenv "HURTWORLD_ANTICHEAT" "1"}}
+saveevery {{getenv "HURTWORLD_SAVE_INTERVAL" "300"}}
+savedirectory /game/bipops
+{{- $admins := getenv "HURTWORLD_ADMIN_IDS" "" -}}
+{{- range (strings.Split "," $admins) }}
+{{- if ne (strings.TrimSpace .) "" }}
+addadmin {{ strings.TrimSpace . }}
+{{- end }}
+{{- end }}

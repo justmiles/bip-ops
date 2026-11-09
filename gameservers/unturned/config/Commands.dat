@@ -1,0 +1,20 @@
+Name {{getenv "UNTURNED_SERVER_NAME" "BipOps Unturned Server"}}
+Map {{getenv "UNTURNED_MAP" "PEI"}}
+Port {{getenv "UNTURNED_PORT" "27015"}}
+MaxPlayers {{getenv "UNTURNED_MAX_PLAYERS" "24"}}
+Perspective {{getenv "UNTURNED_PERSPECTIVE" "Both"}}
+Mode {{getenv "UNTURNED_MODE" "Normal"}}
+{{- $pass := getenv "UNTURNED_PASSWORD" "" }}
+{{- if ne $pass "" }}
+Password {{ $pass }}
+{{- end }}
+{{- if eq (getenv "UNTURNED_PVE" "false") "true" }}
+PvE
+{{- end }}
+{{- if eq (getenv "UNTURNED_CHEATS" "false") "true" }}
+Cheats
+{{- end }}
+{{- $owner := getenv "UNTURNED_OWNER" "" }}
+{{- if ne $owner "" }}
+Owner {{ $owner }}
+{{- end }}

@@ -1,0 +1,7 @@
+game: Hurtworld
+usewine: false
+usex: false
+steamid: 405100
+backupdir: /game/bipops
+configs:
+  "config/exec.txt": "/game/bipops/exec.txt"

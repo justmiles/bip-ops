@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<SkirmishDedicatedServerConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ServerName>{{getenv "NEBULOUS_SERVER_NAME" "BipOps NEBULOUS Server"}}</ServerName>
+	<Password>{{getenv "NEBULOUS_PASSWORD" ""}}</Password>
+	<MaxPlayers>{{getenv "NEBULOUS_MAX_PLAYERS" "10"}}</MaxPlayers>
+	<GamePort>{{getenv "NEBULOUS_GAME_PORT" "7777"}}</GamePort>
+	<QueryPort>{{getenv "NEBULOUS_QUERY_PORT" "27016"}}</QueryPort>
+	<TeamSizeToStart>{{getenv "NEBULOUS_TEAM_SIZE_TO_START" "2"}}</TeamSizeToStart>
+	<MOTD>{{getenv "NEBULOUS_MOTD" "Welcome to a BipOps-hosted NEBULOUS: Fleet Command server!"}}</MOTD>
+	<AllowMapVoting>{{getenv "NEBULOUS_ALLOW_MAP_VOTING" "true"}}</AllowMapVoting>
+	<TimeLimit>{{getenv "NEBULOUS_TIME_LIMIT" "0"}}</TimeLimit>
+	<RequireUniformTeams>{{getenv "NEBULOUS_REQUIRE_UNIFORM_TEAMS" "true"}}</RequireUniformTeams>
+	<Scenario>{{getenv "NEBULOUS_SCENARIO" "Control"}}</Scenario>
+	<MapRotation>{{getenv "NEBULOUS_MAP_ROTATION" "Sequential"}}</MapRotation>
+	<AllowModdedFleets>{{getenv "NEBULOUS_ALLOW_MODDED_FLEETS" "false"}}</AllowModdedFleets>
+	<Admins>
+{{- if getenv "NEBULOUS_ADMIN_STEAM_IDS" }}
+{{- range (getenv "NEBULOUS_ADMIN_STEAM_IDS" | strings.Split ",") }}
+		<unsignedLong>{{ . }}</unsignedLong>
+{{- end }}
+{{- end }}
+	</Admins>
+	<Maps>
+{{- range (getenv "NEBULOUS_MAPS" "Pillars" | strings.Split ",") }}
+		<string>{{ . }}</string>
+{{- end }}
+	</Maps>
+</SkirmishDedicatedServerConfig>

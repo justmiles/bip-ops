@@ -1,0 +1,7 @@
+game: Operation Harsh Doorstop
+usewine: false
+usex: false
+steamid: 950900
+backupdir: /game/HarshDoorstop/Saved/SaveGames
+configs:
+  "config/Game.ini": "/game/HarshDoorstop/Saved/Config/LinuxServer/Game.ini"

@@ -1,0 +1,7 @@
+game: Nightingale
+usewine: false
+usex: false
+steamid: 3796810
+backupdir: /game/NWX/Saved
+configs:
+  "config/ServerSettings.ini": "/game/NWX/Config/ServerSettings.ini"
