@@ -46,6 +46,7 @@ Currently, BipOps supports the following games:
 - [**Nightingale**](./gameservers/nightingale/README.md)
 - [**Operation: Harsh Doorstop**](./gameservers/harshdoorstop/README.md)
 - [**Craftopia**](./gameservers/craftopia/README.md)
+- [**Core Keeper**](./gameservers/corekeeper/README.md)
 
 Each game has its own configuration and management scripts.
 

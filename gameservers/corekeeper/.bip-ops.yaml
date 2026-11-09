@@ -1,0 +1,7 @@
+game: Core Keeper
+usewine: false
+usex: true
+steamid: 1963720
+backupdir: /game/corekeeper
+configs:
+  "config/ServerConfig.json": "/game/corekeeper/ServerConfig.json"

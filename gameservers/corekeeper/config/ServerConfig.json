@@ -1,0 +1,9 @@
+{
+  "worldName": {{ printf "%q" (getenv "COREKEEPER_SERVER_NAME" "BipOps Core Keeper Server") }},
+  "worldSeed": {{ getenv "COREKEEPER_WORLD_SEED" "0" }},
+  "worldMode": {{ getenv "COREKEEPER_WORLD_MODE" "0" }},
+  "world": {{ getenv "COREKEEPER_WORLD_INDEX" "0" }},
+  "maxNumberPlayers": {{ getenv "COREKEEPER_MAX_PLAYERS" "8" }},
+  "season": {{ getenv "COREKEEPER_SEASON" "-1" }},
+  "gameId": {{ printf "%q" (getenv "COREKEEPER_GAME_ID" "") }}
+}
