@@ -1,0 +1,7 @@
+game: Fistful of Frags
+usewine: false
+usex: false
+steamid: 295230
+backupdir: /game/fof/cfg
+configs:
+  "config/server.cfg": "/game/fof/cfg/server.cfg"

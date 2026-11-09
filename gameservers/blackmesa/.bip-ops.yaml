@@ -1,0 +1,7 @@
+game: Black Mesa
+usewine: false
+usex: false
+steamid: 346680
+backupdir: /game/bms/cfg
+configs:
+  "config/server.cfg": "/game/bms/cfg/server.cfg"

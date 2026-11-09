@@ -1,0 +1,7 @@
+game: "Counter-Strike: Source"
+usewine: false
+usex: false
+steamid: 232330
+backupdir: /game/cstrike/cfg
+configs:
+  "config/server.cfg": "/game/cstrike/cfg/server.cfg"

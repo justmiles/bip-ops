@@ -47,6 +47,13 @@ Currently, BipOps supports the following games:
 - [**Operation: Harsh Doorstop**](./gameservers/harshdoorstop/README.md)
 - [**Craftopia**](./gameservers/craftopia/README.md)
 - [**Core Keeper**](./gameservers/corekeeper/README.md)
+- [**Garry's Mod**](./gameservers/garrysmod/README.md)
+- [**Counter-Strike: Source**](./gameservers/css/README.md)
+- [**Day of Defeat: Source**](./gameservers/dods/README.md)
+- [**Half-Life 2: Deathmatch**](./gameservers/hl2dm/README.md)
+- [**Half-Life Deathmatch: Source**](./gameservers/hldms/README.md)
+- [**Black Mesa**](./gameservers/blackmesa/README.md)
+- [**Fistful of Frags**](./gameservers/fof/README.md)
 
 Each game has its own configuration and management scripts.
 

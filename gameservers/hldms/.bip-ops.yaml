@@ -1,0 +1,7 @@
+game: "Half-Life Deathmatch: Source"
+usewine: false
+usex: false
+steamid: 255470
+backupdir: /game/hl1mp/cfg
+configs:
+  "config/server.cfg": "/game/hl1mp/cfg/server.cfg"
