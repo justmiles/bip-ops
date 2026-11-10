@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.13.1] - 2026-11-10
+
+### Fixed
+
+- Icarus dedicated server now sets its browser display name via `-SteamServerName`; the
+  `ServerSettings.ini` `SessionName` key is a no-op in Icarus, so without this flag the
+  server advertised its anonymous Steam ID and was unfindable by name
+- Icarus binds with an explicit `-MultiHome` (defaults to `0.0.0.0`) and passes the
+  game/query ports as launch args so it follows the ephemeral ports the platform assigns
+
+
 ## [0.13.0] - 2026-11-09
 
 ### Added
