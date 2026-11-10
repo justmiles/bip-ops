@@ -35,13 +35,22 @@ ICARUS_QUERY_PORT=${ICARUS_QUERY_PORT:-27015}
 # host port Nomad maps in; the port itself is set via ICARUS_GAME_PORT below.
 ICARUS_MULTIHOME=${ICARUS_MULTIHOME:-0.0.0.0}
 
-# Launch arguments. -log keeps the server console attached so output is captured.
-ARGS="-log"
-ARGS="$ARGS -MultiHome=$ICARUS_MULTIHOME"
-ARGS="$ARGS -PORT=$ICARUS_GAME_PORT"
-ARGS="$ARGS -QueryPort=$ICARUS_QUERY_PORT"
+# The browser display name MUST be set via -SteamServerName: Icarus' ServerSettings.ini
+# "SessionName" key is a known no-op (ignored in-game), so without this flag the server
+# advertises its anonymous Steam ID as the name and is unfindable by name. 64-char limit.
+ICARUS_SESSION_NAME=${ICARUS_SESSION_NAME:-BipOps Icarus Server}
 
-echo "Starting Icarus Dedicated Server (bind $ICARUS_MULTIHOME, game port $ICARUS_GAME_PORT, query port $ICARUS_QUERY_PORT)..."
+# Launch arguments as an array so a SteamServerName containing spaces survives as one arg.
+# -log keeps the server console attached so output is captured.
+ARGS=(
+  -log
+  -SteamServerName="$ICARUS_SESSION_NAME"
+  -MultiHome="$ICARUS_MULTIHOME"
+  -PORT="$ICARUS_GAME_PORT"
+  -QueryPort="$ICARUS_QUERY_PORT"
+)
+
+echo "Starting Icarus Dedicated Server \"$ICARUS_SESSION_NAME\" (bind $ICARUS_MULTIHOME, game port $ICARUS_GAME_PORT, query port $ICARUS_QUERY_PORT)..."
 
 set -x
-exec wine /game/IcarusServer.exe $ARGS
+exec wine /game/IcarusServer.exe "${ARGS[@]}"

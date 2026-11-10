@@ -57,7 +57,7 @@ For details on each setting, see the
 | -------------------------------------------- | --------------------- | ------------------------------------------------------------------------ | ---------------- |
 | `BIPOPS_GAMESERVER`                          | `icarus`              | Must be set to "icarus" for bip-ops to run Icarus                        | icarus           |
 | `BIPOPS_VALIDATE_SERVER_FILES`               | `true`                | Validate server files are up to date before launching                    | true, false      |
-| `ICARUS_SESSION_NAME`                        | `BipOps Icarus Server`| Server display name visible in the server list                           | any string       |
+| `ICARUS_SESSION_NAME`                        | `BipOps Icarus Server`| Browser display name (passed via `-SteamServerName`; the ini `SessionName` key is ignored by Icarus) | any string (<=64 chars) |
 | `ICARUS_JOIN_PASSWORD`                       | (empty)               | Password required to join the server                                     | any string       |
 | `ICARUS_ADMIN_PASSWORD`                      | (empty)               | Admin password for server management                                     | any string       |
 | `ICARUS_MAX_PLAYERS`                         | `8`                   | Maximum number of player slots                                           | integer          |
