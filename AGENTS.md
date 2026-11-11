@@ -208,6 +208,13 @@ The `user` bundle in `s6-overlay/s6-rc.d/user/contents.d/` lists all services th
 - **YAML parsing**: Use `yq` to read `.bip-ops.yaml` fields
 - **Wine games**: Set `WINEPREFIX="/game/.wine"` and export `SteamAppId` in `start.sh`
 
+## Git Conventions
+
+- **Always merge to `main`.** This repo uses trunk-based development: integrate every
+  change into the `main` branch. Commit directly to `main` and push to the remote `main`
+  branch. This is a non-production project under rapid development, so do not hold work on
+  long-lived side branches.
+
 ## When Viewing External Sites or Documentation
 
 Run the command `reader --image-mode none <url>` to view the contents of the webpage in stdout.
