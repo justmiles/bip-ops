@@ -1,0 +1,8 @@
+.git
+.github
+.devbox
+.devcontainer.json
+tmp.txt
+CHANGELOG.md
+README.md
+AGENTS.md

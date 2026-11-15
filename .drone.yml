@@ -1,52 +1,71 @@
 ---
 # Builds the single justmiles/bipops runtime image (SteamCMD + Wine + s6-overlay).
-# Mirrors the Makefile: `build` validates the image, `publish` pushes to Docker Hub.
+#
+# The image's base layers (apt, Wine, GE-Proton, Xpra, s6-overlay, SteamCMD,
+# devbox) take ~40 min to build from scratch, but they change rarely -- the
+# Dockerfile copies the frequently-edited `gameservers/` config LAST. The win is
+# caching: this builds against the runner's HOST Docker daemon (mounted socket),
+# whose BuildKit cache persists on local disk between builds. So after one cold
+# warm-up build, a config-only change rebuilds just the final COPY layers in
+# seconds instead of reinstalling the whole toolchain.
+#
+# A throwaway dind builder (plugins/docker) has no persistent cache, which is
+# why every build was a full ~40-48 min rebuild.
+#
+# Requires: the Drone repo marked "Trusted" so the host socket volume is allowed.
 kind: pipeline
 type: docker
 name: image
 
+clone:
+  depth: 1
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+
 steps:
-  # Validation build on pull requests: build the image but do not push.
+  # Build once against the host daemon (persistent layer cache). Push behaviour
+  # depends on the event:
+  #   pull_request / non-main push -> build only (validation), no push
+  #   main push                    -> publish latest + sha-<short>
+  #   tag v1.2.3                    -> publish 1.2.3, 1.2, 1, + sha-<short>
   - name: build
-    image: plugins/docker
-    settings:
-      repo: justmiles/bipops
-      dry_run: true
-    when:
-      event:
-        - pull_request
-
-  # Publish the rolling `latest` plus a short-SHA tag on every main push.
-  - name: publish
-    image: plugins/docker
-    settings:
-      repo: justmiles/bipops
-      username:
+    image: docker:27-cli
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    environment:
+      DOCKER_BUILDKIT: "1"
+      DOCKER_USER:
         from_secret: docker_username
-      password:
+      DOCKER_TOKEN:
         from_secret: docker_password
-      tags:
-        - latest
-        - sha-${DRONE_COMMIT_SHA:0:7}
-    when:
-      branch:
-        - main
-      event:
-        - push
-
-  # Release builds: a git tag like v1.2.3 publishes 1.2.3, 1.2, and 1.
-  - name: publish-tag
-    image: plugins/docker
-    settings:
-      repo: justmiles/bipops
-      username:
-        from_secret: docker_username
-      password:
-        from_secret: docker_password
-      auto_tag: true
-    when:
-      event:
-        - tag
+    commands:
+      - REPO=justmiles/bipops
+      - SHA=sha-$(echo "$DRONE_COMMIT_SHA" | cut -c1-7)
+      - docker build -t "$REPO:$SHA" .
+      - |
+        case "$DRONE_BUILD_EVENT" in
+          tag)
+            echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
+            docker push "$REPO:$SHA"
+            V="${DRONE_TAG#v}"; MIN="${V%.*}"; MAJ="${V%%.*}"
+            for t in "$V" "$MIN" "$MAJ"; do
+              docker tag "$REPO:$SHA" "$REPO:$t" && docker push "$REPO:$t"
+            done ;;
+          push)
+            if [ "$DRONE_COMMIT_BRANCH" = "main" ]; then
+              echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
+              docker push "$REPO:$SHA"
+              docker tag "$REPO:$SHA" "$REPO:latest" && docker push "$REPO:latest"
+            else
+              echo "non-main push: build validated, not pushing"
+            fi ;;
+          *)
+            echo "$DRONE_BUILD_EVENT: build validated, not pushing" ;;
+        esac
 
 trigger:
   event:
