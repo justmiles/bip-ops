@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.13.2] - 2026-11-15
+
+### Fixed
+
+- Necesse server password is no longer wrapped in quotes in `server.cfg`; Necesse reads the
+  surrounding quotes literally, so a blank password rendered as `""` (not passwordless) and a
+  password of `test` required joining with the literal `"test"` including quotes
+
+
 ## [0.13.1] - 2026-11-10
 
 ### Fixed
