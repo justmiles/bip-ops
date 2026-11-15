@@ -1,0 +1,55 @@
+---
+# Builds the single justmiles/bipops runtime image (SteamCMD + Wine + s6-overlay).
+# Mirrors the Makefile: `build` validates the image, `publish` pushes to Docker Hub.
+kind: pipeline
+type: docker
+name: image
+
+steps:
+  # Validation build on pull requests: build the image but do not push.
+  - name: build
+    image: plugins/docker
+    settings:
+      repo: justmiles/bipops
+      dry_run: true
+    when:
+      event:
+        - pull_request
+
+  # Publish the rolling `latest` plus a short-SHA tag on every main push.
+  - name: publish
+    image: plugins/docker
+    settings:
+      repo: justmiles/bipops
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      tags:
+        - latest
+        - sha-${DRONE_COMMIT_SHA:0:7}
+    when:
+      branch:
+        - main
+      event:
+        - push
+
+  # Release builds: a git tag like v1.2.3 publishes 1.2.3, 1.2, and 1.
+  - name: publish-tag
+    image: plugins/docker
+    settings:
+      repo: justmiles/bipops
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      auto_tag: true
+    when:
+      event:
+        - tag
+
+trigger:
+  event:
+    - push
+    - pull_request
+    - tag

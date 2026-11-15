@@ -54,6 +54,7 @@ Currently, BipOps supports the following games:
 - [**Half-Life Deathmatch: Source**](./gameservers/hldms/README.md)
 - [**Black Mesa**](./gameservers/blackmesa/README.md)
 - [**Fistful of Frags**](./gameservers/fof/README.md)
+- [**SCUM**](./gameservers/scum/README.md)
 
 Each game has its own configuration and management scripts.
 
@@ -193,9 +194,16 @@ configs:
   "config/UDKDedServerSettings.ini": "/game/UDKGame/Config/DefaultDedServerSettings.ini"
 ```
 
+## Continuous Integration
+
+CI runs on [Drone](https://drone.justmiles.io) (`.drone.yml`). Pull requests build
+the image to validate it; pushes to `main` publish `justmiles/bipops:latest` plus a
+short-SHA tag to Docker Hub, and a git tag like `v1.2.3` publishes the matching semver
+tags. Publishing needs the `docker_username` and `docker_password` repo secrets set in
+Drone.
+
 ## ROADMAP
 
-- Add CI/CD pipeline
 - Add non-Steam games
 - Add support for manual config files via environment variable `BIPOPS_MANUAL_CONFIG=true`
 - CLI: create a `bip-ops` cli to handle admin tasks:
