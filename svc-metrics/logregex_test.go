@@ -10,6 +10,10 @@ import (
 // TestLogregexFollowsNecesse reproduces the deployed failure: the readiness line
 // is written BEFORE svc-metrics attaches, and joins/leaves are appended AFTER.
 // The tailer must still report ready and the correct live player count.
+// Log format verified against live Necesse 1.3.3 server output:
+//
+//	join:  Client "76561198813665297" connected on slot 1/4
+//	leave: Player 76561198813665297 ("justMiles2") disconnected with message: Quit
 func TestLogregexFollowsNecesse(t *testing.T) {
 	logPath := filepath.Join(t.TempDir(), "current")
 
@@ -18,8 +22,8 @@ func TestLogregexFollowsNecesse(t *testing.T) {
 		[]byte("[2026-11-16 00:00:00] Started server using port 14159 with 10 slots on world \"default.zip\"\n"), 0o644))
 
 	s := newLogregexStrategy(logPath,
-		`Client "(.+?)" connected on slot`,
-		`\("(.+?)", slot [0-9]+"\) disconnected with message:`,
+		`Client "([0-9]+)" connected on slot`,
+		`Player ([0-9]+) \(`,
 		&ReadyConfig{LogPattern: "Started server using port"},
 	).(*logregexStrategy)
 
@@ -35,15 +39,23 @@ func TestLogregexFollowsNecesse(t *testing.T) {
 	waitFor(t, func() bool { sm, _ := s.Collect(); return sm.ServerReady }, "server_ready from pre-existing boot line")
 
 	// A join appended AFTER attach must be followed.
-	appendLine(`[t] Client "Alice Smith" connected on slot 0/10`)
-	waitFor(t, func() bool { sm, _ := s.Collect(); return sm.ActivePlayerCount == 1 }, "count==1 after Alice joins")
+	appendLine(`[t] Client "76561190000000001" connected on slot 0/10`)
+	waitFor(t, func() bool { sm, _ := s.Collect(); return sm.ActivePlayerCount == 1 }, "count==1 after first player joins")
 
-	appendLine(`[t] Client "Bob" connected on slot 1/10`)
-	waitFor(t, func() bool { sm, _ := s.Collect(); return sm.ActivePlayerCount == 2 }, "count==2 after Bob joins")
+	appendLine(`[t] Client "76561190000000002" connected on slot 1/10`)
+	waitFor(t, func() bool { sm, _ := s.Collect(); return sm.ActivePlayerCount == 2 }, "count==2 after second player joins")
 
-	// A disconnect must decrement by the SAME captured name.
-	appendLine(`[t] Player human76561190000 ("Alice Smith", slot 0") disconnected with message: Quit`)
-	waitFor(t, func() bool { sm, _ := s.Collect(); return sm.ActivePlayerCount == 1 }, "count==1 after Alice leaves")
+	// Player names must be anonymised (never expose raw Steam IDs).
+	sm, _ := s.Collect()
+	for _, name := range sm.PlayerNames {
+		if name == "76561190000000001" || name == "76561190000000002" {
+			t.Errorf("Steam ID leaked as player name: %q", name)
+		}
+	}
+
+	// A disconnect must decrement by the same captured Steam ID.
+	appendLine(`[t] Player 76561190000000001 ("Alice") disconnected with message: Quit`)
+	waitFor(t, func() bool { sm, _ := s.Collect(); return sm.ActivePlayerCount == 1 }, "count==1 after first player leaves")
 }
 
 func must(t *testing.T, err error) {

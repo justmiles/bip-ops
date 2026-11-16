@@ -2,10 +2,12 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"log/slog"
 	"os"
 	"regexp"
+	"sort"
 	"strings"
 	"sync"
 )
@@ -18,14 +20,15 @@ type logregexStrategy struct {
 	readyPattern *regexp.Regexp
 
 	mu          sync.Mutex
-	players     map[string]struct{}
+	players     map[string]int // internal key -> display index (0-based)
+	nextIdx     int
 	serverReady bool
 }
 
 func newLogregexStrategy(logFile, joinPattern, leavePattern string, ready *ReadyConfig) Strategy {
 	s := &logregexStrategy{
 		logFile: logFile,
-		players: make(map[string]struct{}),
+		players: make(map[string]int),
 		ready:   ready,
 	}
 	if joinPattern != "" {
@@ -48,13 +51,16 @@ func (s *logregexStrategy) Collect() (Sample, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	names := make([]string, 0, len(s.players))
-	for name := range s.players {
-		names = append(names, name)
+	// Report "Player N" labels instead of raw identifiers (which may be Steam IDs
+	// or other internal keys that shouldn't be surfaced in the UI).
+	labels := make([]string, 0, len(s.players))
+	for _, idx := range s.players {
+		labels = append(labels, fmt.Sprintf("Player %d", idx+1))
 	}
+	sort.Strings(labels)
 	return Sample{
 		ActivePlayerCount: len(s.players),
-		PlayerNames:       names,
+		PlayerNames:       labels,
 		ServerReady:       s.serverReady,
 	}, nil
 }
@@ -133,7 +139,10 @@ func (s *logregexStrategy) processLine(line string) {
 	if s.joinRegex != nil {
 		if m := s.joinRegex.FindStringSubmatch(line); m != nil {
 			name := captureOrFull(m)
-			s.players[name] = struct{}{}
+			if _, exists := s.players[name]; !exists {
+				s.players[name] = s.nextIdx
+				s.nextIdx++
+			}
 		}
 	}
 

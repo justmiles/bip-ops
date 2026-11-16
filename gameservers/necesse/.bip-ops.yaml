@@ -11,11 +11,11 @@ metrics:
   logregex:
     # Necesse has no RCON and does not answer Steam A2S queries (verified), so track
     # players from the server log (stdout -> /var/log/gameserver/current). Verified
-    # against Server.jar 1.3.3; both lines carry the player name, captured so the
+    # against live server logs (1.3.3); both patterns capture the Steam ID so the
     # join/leave set stays balanced:
-    #   join:  Client "<name>" connected on slot <n>
-    #   leave: Player <auth> ("<name>", slot <n>") disconnected with message: <reason>
-    join_pattern: 'Client "(.+?)" connected on slot'
-    leave_pattern: '\("(.+?)", slot [0-9]+"\) disconnected with message:'
+    #   join:  Client "76561198813665297" connected on slot 1/4
+    #   leave: Player 76561198813665297 ("justMiles2") disconnected with message: Quit
+    join_pattern: 'Client "([0-9]+)" connected on slot'
+    leave_pattern: 'Player ([0-9]+) \('
   ready:
     log_pattern: 'Started server using port'

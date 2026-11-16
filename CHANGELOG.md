@@ -8,6 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.13.7] - 2026-11-16
+
+### Fixed
+
+- Necesse `logregex` leave pattern now correctly matches the actual disconnect log
+  format (`Player <steamid> ("<name>") disconnected with message: <reason>`).
+  The previous pattern expected a `slot N` field that is not present, so players
+  were never removed from the live-player set after disconnecting (count only ever
+  went up). Both join and leave patterns now capture the Steam ID as the tracking
+  key so the set stays balanced.
+- `logregex` strategy no longer surfaces raw internal identifiers (e.g. Steam IDs)
+  as player names in the UI. Names are now reported as `Player 1`, `Player 2`, etc.
+  The Steam ID is still used internally as the join/leave key to keep the set
+  consistent, but is never stored in `player_names`.
+
+
 ## [0.13.6] - 2026-11-16
 
 ### Fixed
