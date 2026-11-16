@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Minecraft Bedrock Edition dedicated server (`minecraftbedrock`). Native Linux binary, no Steam, downloads from Mojang's official page.
+- `unzip` added to base Docker image (required for Bedrock server zip extraction).
+
 
 ## [0.13.8] - 2026-11-16
 

@@ -1,0 +1,16 @@
+game: Minecraft Bedrock
+usewine: false
+usex: false
+steamid: 0
+backupdir: /game/worlds
+configs:
+  "config/server.properties": "/game/server.properties"
+metrics:
+  strategy: logregex
+  interval: 30s
+  logregex:
+    # Bedrock logs: "[DATE TIME INFO] Player connected: Steve, xuid: 123"
+    join_pattern: 'Player connected: ([^,]+),'
+    leave_pattern: 'Player disconnected: ([^,]+),'
+  ready:
+    log_pattern: 'Server started\.'

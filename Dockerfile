@@ -18,6 +18,7 @@ RUN apt-get update \
   busybox \
   curl \
   tar \
+  unzip \
   xz-utils \
   gnupg \
   locales \

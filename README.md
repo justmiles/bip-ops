@@ -18,6 +18,7 @@ Currently, BipOps supports the following games:
 - [**Palworld**](./gameservers/palworld/README.md)
 - [**HumanitZ**](./gameservers/humanitz/README.md)
 - [**Minecraft**](./gameservers/minecraft/README.md)
+- [**Minecraft Bedrock**](./gameservers/minecraftbedrock/README.md)
 - [**Necesse**](./gameservers/necesse/README.md)
 - [**The Forest**](./gameservers/theforest/README.md)
 - [**Sons of the Forest**](./gameservers/sonsoftheforest/README.md)
