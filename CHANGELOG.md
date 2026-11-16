@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.13.4] - 2026-11-16
+
+### Added
+
+- Enrolled the remaining game servers in `svc-metrics` by adding a `metrics:` block to each
+  `gameservers/<game>/.bip-ops.yaml`. Strategy per game (fail-safe by design; no game can be
+  wrongly auto-stopped): 30 use `a2s` (Steam query port), 1 uses `rcon` (HumanitZ, Valve RCON),
+  7 use `none` (corekeeper, craftopia, nightingale, satisfactory, scum, starrupture, valheim).
+  Necesse uses `logregex` (verified against Server.jar 1.3.3).
+- Documented the `metrics:` block and `svc-metrics` strategies in `AGENTS.md`.
+
+
 ## [0.13.3] - 2026-11-16
 
 ### Added
