@@ -5,3 +5,11 @@ steamid: 295230
 backupdir: /game/fof/cfg
 configs:
   "config/server.cfg": "/game/fof/cfg/server.cfg"
+metrics:
+  # Source engine (SRCDS) answers Steam A2S_INFO on the same UDP socket as the
+  # game port. start.sh / README: the game + A2S query share -port FOF_PORT
+  # (default 27015). A2S is fail-safe here, so use it over RCON/logregex.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: FOF_PORT

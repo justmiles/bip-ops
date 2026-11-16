@@ -5,3 +5,15 @@ steamid: 380870
 backupdir: /game/Zomboid/
 configs:
   "config/server.ini": "/game/Zomboid/Server/servertest.ini"
+metrics:
+  # Project Zomboid is a Steam server; its A2S/Steam query shares the UDP game
+  # port (DefaultPort, PZ_GAME_PORT, default 16261) per the start.sh/README port
+  # table and PZ networking docs. A2S is fail-safe here: if the server demands an
+  # A2S challenge (0x41), svc-metrics' unchallenged query errors -> "not ready"
+  # -> the server is never wrongly stopped (it only ever reports a real count).
+  # Preferred over rcon: PZ RCON is disabled unless PZ_RCON_PASSWORD is set
+  # (empty by default), so rcon would usually never authenticate.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: PZ_GAME_PORT

@@ -6,3 +6,10 @@ backupdir: /game/KFGame/Config
 configs:
   "config/LinuxServer-KFGame.ini": "/game/KFGame/Config/LinuxServer-KFGame.ini"
   "config/KFWeb.ini": "/game/KFGame/Config/KFWeb.ini"
+metrics:
+  # KF2 exposes a Steam A2S query port, passed to the server binary as
+  # -QueryPort="${KILLINGFLOOR2_QUERY_PORT:-27015}" in start.sh.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: KILLINGFLOOR2_QUERY_PORT

@@ -5,3 +5,11 @@ steamid: 629800
 backupdir: /game/Mordhau/Saved
 configs:
   "config/Game.ini": "/game/Mordhau/Saved/Config/LinuxServer/Game.ini"
+metrics:
+  # a2s: native UE4 Steam dedicated server exposes a Steam A2S query port via
+  # -QueryPort (start.sh, env MORDHAU_QUERY_PORT, default 27015). A2S_INFO on that
+  # port returns the player count. Self-consistent and fail-safe.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: MORDHAU_QUERY_PORT

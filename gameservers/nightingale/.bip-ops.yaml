@@ -5,3 +5,12 @@ steamid: 3796810
 backupdir: /game/NWX/Saved
 configs:
   "config/ServerSettings.ini": "/game/NWX/Config/ServerSettings.ini"
+metrics:
+  # No auto-stop telemetry available. Nightingale (UE5) exposes no Steam A2S query
+  # port and no public server browser (README.md: "no Steam A2S query port; players
+  # connect by IP"), so a2s cannot collect. It has no Source RCON (only an in-game
+  # AdminPassword, not a wired RCON port/password), so rcon is out. Its log lines for
+  # player join/leave are not documented in a reliable, stable form, so logregex would
+  # risk wrongly stopping a populated server. none is the fail-safe choice.
+  strategy: none
+  interval: 30s

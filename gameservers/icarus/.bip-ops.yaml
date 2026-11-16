@@ -5,3 +5,11 @@ steamid: 2089300
 backupdir: /game/Icarus/Saved
 configs:
   "config/ServerSettings.ini": "/game/Icarus/Saved/Config/WindowsServer/ServerSettings.ini"
+metrics:
+  strategy: a2s
+  interval: 30s
+  a2s:
+    # Icarus exposes a Steam A2S query listener on ICARUS_QUERY_PORT (default
+    # 27015), passed to the server via -QueryPort (see start.sh / README.md
+    # Network Ports). svc-metrics reads the A2S_INFO player-count on localhost.
+    query_port_env: ICARUS_QUERY_PORT

@@ -5,3 +5,13 @@ steamid: 2278520
 backupdir: /game/savegame
 configs:
   "config/enshrouded_server.json": "/game/enshrouded_server.json"
+metrics:
+  # Enshrouded is a Steam server (steamid 2278520) that advertises in the Steam
+  # server browser via its query port. config/enshrouded_server.json sets
+  # queryPort from ENSHROUDED_QUERY_PORT (README: "Game / query port", default
+  # 15637), which answers A2S_INFO. a2s is the safe, self-consistent default for
+  # Steam games.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: ENSHROUDED_QUERY_PORT

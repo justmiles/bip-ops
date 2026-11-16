@@ -5,3 +5,12 @@ steamid: 1670340
 backupdir: /game/DedicatedServerSave
 configs:
   "config/ServerSetting.ini": "/game/ServerSetting.ini"
+metrics:
+  # Craftopia discovers/joins via the Steam LOBBY (isUseSteamLobby=1, README +
+  # start.sh), not a Steam server-browser A2S query path. There is no separate
+  # query-port env (only CRAFTOPIA_PORT 6587/udp, the game/direct-connect port)
+  # and no evidence that port answers A2S_INFO, so a2s would never report ready.
+  # README states "there is no in-game RCON console" -> rcon ruled out, and the
+  # player join/leave log format is undocumented -> logregex would be an unsafe
+  # guess. No safe player-count source, so leave svc-metrics idle.
+  strategy: none

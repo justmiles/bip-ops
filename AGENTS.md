@@ -58,6 +58,7 @@ Create the following in `gameservers/<NEWGAMESERVER>/`:
    - **steamid**: Steam Application ID (used by SteamCMD `+app_update`)
    - **backupdir**: Absolute path inside the container where game saves/data live (rsnapshot backs this up)
    - **configs**: Key/value map of template source → rendered destination path
+   - **metrics**: Block driving the `svc-metrics` sidecar (active player count + server-ready signal). See **Metrics (svc-metrics)** below. Omit the block or set `strategy: none` to leave the sidecar idle.
 
 2. **`start.sh`** — launch script for the game server. Conventions:
    - Shebang: `#!/bin/bash` with `set -e`
@@ -133,9 +134,35 @@ Runtime + lsteamclient path, which needs a running Steam client and `bwrap`/user
 that Docker's default seccomp profile blocks. `umu-launcher` was evaluated and does not solve
 the Steamworks-headless problem either.
 
+### Metrics (svc-metrics)
+
+The `svc-metrics` s6 service (source: `svc-metrics/`) polls each game for its **active player
+count** (consumed by the idle auto-shutoff feature) and a **server-ready** signal. It reads the
+`metrics:` block from the running game's `.bip-ops.yaml` at
+`/gameservers/$BIPOPS_GAMESERVER/.bip-ops.yaml`. With no block, `strategy: none`, or an empty
+strategy, the sidecar stays idle — so add a block to every new game that can report players.
+
+Common keys:
+
+- **strategy**: `rcon`, `a2s`, `logregex`, or `none`.
+- **interval**: Poll interval as a Go duration (e.g. `30s`). Defaults to `30s`.
+- **ready.log_pattern**: Regex matched against the gameserver log that marks boot complete.
+
+Pick exactly one strategy sub-block:
+
+| Strategy | Sub-block | Keys | Use when |
+|----------|-----------|------|----------|
+| `rcon` | `rcon:` | `command` (lists players), `players_regex` (match count = player count; match data rows, not headers), `port_env` (default `25575`), `password_env` | The game exposes RCON |
+| `a2s` | `a2s:` | `query_port_env` (default `27015`) | Steam/Source game with an A2S query port |
+| `logregex` | `logregex:` | `join_pattern`, `leave_pattern`, `log_file` (default `/var/log/gameserver/current`) | No RCON/A2S — tail the log for join/leave events |
+
+`port_env`/`password_env`/`query_port_env` name the **env var** holding the value, not the value
+itself; each has a fallback default when the var is empty or unset. Reference examples:
+`gameservers/palworld` (rcon), `gameservers/tf2` (a2s), `gameservers/minecraft` (logregex).
+
 ### Checklist
 
-- [ ] Create `gameservers/<name>/.bip-ops.yaml`
+- [ ] Create `gameservers/<name>/.bip-ops.yaml` (include a `metrics:` block or `strategy: none`)
 - [ ] Create `gameservers/<name>/start.sh` (make executable)
 - [ ] Create `gameservers/<name>/config/<templates>` (if the game has configurable settings)
 - [ ] Create `gameservers/<name>/README.md`

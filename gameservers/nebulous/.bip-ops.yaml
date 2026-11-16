@@ -5,3 +5,12 @@ steamid: 2353090
 backupdir: /game/Saved
 configs:
   "config/DedicatedServerConfig.xml": "/game/DedicatedServerConfig.xml"
+metrics:
+  strategy: a2s
+  interval: 30s
+  a2s:
+    # Steam A2S server-browser query port (UDP). Rendered into
+    # DedicatedServerConfig.xml as <QueryPort>; env NEBULOUS_QUERY_PORT (default 27016,
+    # see start.sh port notes + README Required Ports). Gameplay is TCP on 7777; only
+    # this query port speaks A2S.
+    query_port_env: NEBULOUS_QUERY_PORT

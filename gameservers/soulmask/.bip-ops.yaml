@@ -4,3 +4,12 @@ usex: false
 steamid: 3017300
 backupdir: /game/WS/Saved
 configs: {}
+metrics:
+  # Soulmask is a Steamworks server with Steam server-browser visibility; it
+  # exposes a Steam A2S query port via -QueryPort (SOULMASK_QUERY_PORT, default
+  # 27015/udp). Source: start.sh (-QueryPort="${SOULMASK_QUERY_PORT:-27015}")
+  # and README.md "Required Ports". a2s is self-consistent and fail-safe.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: SOULMASK_QUERY_PORT

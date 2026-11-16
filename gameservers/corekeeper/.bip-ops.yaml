@@ -5,3 +5,14 @@ steamid: 1963720
 backupdir: /game/corekeeper
 configs:
   "config/ServerConfig.json": "/game/corekeeper/ServerConfig.json"
+metrics:
+  # No sound, fail-safe strategy available for Core Keeper, so leave it idle (never auto-stopped).
+  # - a2s: Core Keeper's Steam query port is COREKEEPER_PORT + 1 (27016, per README "Steam query / relay
+  #   (port + 1)"). No env var holds that value, and svc-metrics does no offset arithmetic -- it would query
+  #   COREKEEPER_PORT (27015, the game port), which is wrong. Also unconfirmed the server answers raw A2S_INFO
+  #   rather than only the Steam SDR relay.
+  # - rcon: Core Keeper has no RCON (no port/password env in start.sh/README).
+  # - logregex: Core Keeper's -batchmode Unity log (-logfile -) has no verified paired join/leave lines that
+  #   capture the identical player id, so a logregex guess risks wrongly stopping a populated server.
+  strategy: none
+  interval: 30s

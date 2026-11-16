@@ -5,3 +5,11 @@ steamid: 950900
 backupdir: /game/HarshDoorstop/Saved/SaveGames
 configs:
   "config/Game.ini": "/game/HarshDoorstop/Saved/Config/LinuxServer/Game.ini"
+metrics:
+  # Steam dedicated server exposes an A2S query port (-QueryPort, start.sh:19,41;
+  # steamclient.so is wired so A2S server queries init on a headless host). Use A2S
+  # against the query port env; fail-safe (never wrongly stops a populated server).
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: HARSHDOORSTOP_QUERY_PORT

@@ -6,3 +6,10 @@ backupdir: /backups/current/Saves/
 configs:
   "config/dedicatedserver.cfg": "/backups/current/dedicatedserver.cfg"
   "config/ownerswhitelist.txt": "/backups/current/ownerswhitelist.txt"
+metrics:
+  strategy: a2s
+  interval: 30s
+  a2s:
+    # SOTF_QUERY_PORT (default 27016) sets QueryPort in dedicatedserver.cfg,
+    # the Steam A2S/discovery UDP port (see README Network Ports table).
+    query_port_env: SOTF_QUERY_PORT

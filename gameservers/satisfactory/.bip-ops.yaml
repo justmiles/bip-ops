@@ -5,3 +5,14 @@ steamid: 1690800
 backupdir: /game/.config/Epic/FactoryGame/Saved/
 configs:
   "config/Game.ini": "/game/.config/Epic/FactoryGame/Saved/Config/LinuxServer/Game.ini"
+metrics:
+  # strategy=none: Satisfactory does not expose a Steam A2S interface. Its
+  # query path is the proprietary UDP "Lightweight Query API" on 7777 (same
+  # port as -Port, see start.sh / README Required Ports); the legacy A2S
+  # ServerQueryPort is off by default. a2s would send A2S_INFO to a server
+  # that never answers it -> wrong. It has no Source RCON (only a
+  # token-authed HTTPS API on 7777/tcp), so rcon is out. logregex is unsafe:
+  # the server boots with NO session loaded (claimed in-game, README), so a
+  # ready/join pattern would misfire and could wrongly stop a populated
+  # server. none is fail-safe (svc-metrics idle, never auto-stopped).
+  strategy: none

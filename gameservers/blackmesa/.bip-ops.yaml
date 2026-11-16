@@ -5,3 +5,10 @@ steamid: 346680
 backupdir: /game/bms/cfg
 configs:
   "config/server.cfg": "/game/bms/cfg/server.cfg"
+metrics:
+  # Black Mesa is a Source/SRCDS server; A2S_INFO is answered on the same UDP
+  # port as the game connection (-port, env BLACKMESA_PORT), per start.sh.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: BLACKMESA_PORT

@@ -3,3 +3,17 @@ usewine: true
 usex: true
 steamid: 3809400
 backupdir: /game/StarRupture/Saved/SaveGames
+metrics:
+  # strategy=none: StarRupture runs the EOS build (start.sh launches
+  # StarRuptureServerEOS-Win64-Shipping.exe) and is discovered/joined via Epic
+  # Online Services by direct IP:port -- it has no public Steam server browser and
+  # no real Steam A2S interface. start.sh defines STARRUPTURE_QUERY_PORT (default
+  # 27015) but NEVER passes it to the launch ARGS (only -Port=STARRUPTURE_GAME_PORT
+  # is wired), so no query port actually listens; a2s would send A2S_INFO to a
+  # socket that never answers -> permanent "not ready", never useful. No Source
+  # RCON port/password is exposed (start.sh wires none), so rcon is out. No
+  # documented stable join/leave log lines, so logregex would risk wrongly stopping
+  # a populated server. none is the fail-safe choice (matches satisfactory /
+  # nightingale, the other EOS/UE servers).
+  strategy: none
+  interval: 30s

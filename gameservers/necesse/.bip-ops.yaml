@@ -5,3 +5,17 @@ steamid: 1169370
 backupdir: /home/bipops/.config/Necesse/saves
 configs:
   "config/server.cfg": "/home/bipops/.config/Necesse/cfg/server.cfg"
+metrics:
+  strategy: logregex
+  interval: 30s
+  logregex:
+    # Necesse has no RCON and does not answer Steam A2S queries (verified), so track
+    # players from the server log (stdout -> /var/log/gameserver/current). Verified
+    # against Server.jar 1.3.3; both lines carry the player name, captured so the
+    # join/leave set stays balanced:
+    #   join:  Client "<name>" connected on slot <n>
+    #   leave: Player <auth> ("<name>", slot <n>") disconnected with message: <reason>
+    join_pattern: 'Client "(.+?)" connected on slot'
+    leave_pattern: '\("(.+?)", slot [0-9]+"\) disconnected with message:'
+  ready:
+    log_pattern: 'Started server using port'

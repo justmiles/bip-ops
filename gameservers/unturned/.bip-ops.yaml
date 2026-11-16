@@ -6,3 +6,14 @@ backupdir: /game/Servers/bipops
 configs:
   "config/Commands.dat": "/game/Servers/bipops/Server/Commands.dat"
   "config/Config.json": "/game/Servers/bipops/Server/Config.json"
+metrics:
+  strategy: a2s
+  interval: 30s
+  a2s:
+    # Unturned is a Steam dedicated server (appid 1110390) with a Steam A2S query
+    # interface. Per start.sh/README the query port is derived as UNTURNED_PORT + 1
+    # (27015 game -> 27016 query); there is no separate query-port env var, and
+    # svc-metrics resolves query_port_env verbatim (no +1 arithmetic). We point it
+    # at UNTURNED_PORT (the only real port env). a2s is fail-safe: it only ever
+    # reports a real player count, and errors -> "not ready" -> never wrongly stops.
+    query_port_env: UNTURNED_PORT

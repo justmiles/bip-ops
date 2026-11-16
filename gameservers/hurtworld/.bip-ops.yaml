@@ -5,3 +5,10 @@ steamid: 405100
 backupdir: /game/bipops
 configs:
   "config/exec.txt": "/game/bipops/exec.txt"
+metrics:
+  # Hurtworld is a Steam (appid 405100) Unity server exposing a dedicated A2S
+  # query port via HURTWORLD_QUERY_PORT (exec.txt "queryport", default 12881).
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: HURTWORLD_QUERY_PORT

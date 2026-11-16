@@ -5,3 +5,11 @@ steamid: 232370
 backupdir: /game/hl2mp/cfg
 configs:
   "config/server.cfg": "/game/hl2mp/cfg/server.cfg"
+metrics:
+  strategy: a2s
+  interval: 30s
+  a2s:
+    # Source engine (SRCDS): start.sh wires the Steam A2S query onto the same
+    # UDP -port as the game ("Game + Steam A2S query share the UDP -port"),
+    # set via HL2DM_PORT (default 27015).
+    query_port_env: HL2DM_PORT

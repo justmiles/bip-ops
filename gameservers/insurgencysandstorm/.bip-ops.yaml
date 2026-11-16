@@ -5,3 +5,10 @@ steamid: 581330
 backupdir: /game/Insurgency/Saved
 configs:
   "config/Game.ini": "/game/Insurgency/Saved/Config/LinuxServer/Game.ini"
+metrics:
+  # Steam A2S query on the dedicated -QueryPort (start.sh: INSURGENCYSANDSTORM_QUERY_PORT, default 27131).
+  # RCON (Source, TCP 27015) is disabled by default and gated on a password, so a2s is the fail-safe choice.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: INSURGENCYSANDSTORM_QUERY_PORT

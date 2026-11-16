@@ -6,3 +6,10 @@ backupdir: /game/Vein/Saved/SaveGames
 configs:
   "config/Engine.ini": "/game/Vein/Saved/Config/LinuxServer/Engine.ini"
   "config/Game.ini": "/game/Vein/Saved/Config/LinuxServer/Game.ini"
+metrics:
+  # VEIN exposes a Steam A2S query port (default 27015) for the server browser;
+  # start.sh passes -QueryPort=$VEIN_QUERY_PORT (config/Game.ini GameServerQueryPort, README port table).
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: VEIN_QUERY_PORT

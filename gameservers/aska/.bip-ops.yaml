@@ -5,3 +5,12 @@ steamid: 3246670
 backupdir: /game/.wine/drive_c/users/bipops/AppData/LocalLow/Sand Sailor Studio/Aska/data/server
 configs:
   "config/server_properties.txt": "/game/server_properties.txt"
+metrics:
+  # Aska is a Steam dedicated server with a dedicated Steam query port
+  # ("steam query port" in server_properties.txt, driven by ASKA_STEAM_QUERY_PORT,
+  # default 27016). A2S_INFO on that port returns the player count. Self-consistent
+  # and fail-safe.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: ASKA_STEAM_QUERY_PORT

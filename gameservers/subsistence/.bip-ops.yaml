@@ -5,3 +5,12 @@ steamid: 1362640
 backupdir: /game/UDKGame/SaveData
 configs:
   "config/UDKDedServerSettings.ini": /game/UDKGame/Config/DefaultDedServerSettings.ini
+metrics:
+  strategy: a2s
+  interval: 30s
+  a2s:
+    # Subsistence (UDK/Steam) answers A2S_INFO on the Steam query port 27015/UDP
+    # (README "Steam query port"; UDKEngine.ini QueryPort=27015, hardcoded - no env var).
+    # No env var holds the query port, so leave query_port_env empty: svc-metrics
+    # falls back to 27015. (Empty value keeps the a2s block non-nil.)
+    query_port_env: ""

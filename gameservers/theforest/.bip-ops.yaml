@@ -5,3 +5,10 @@ steamid: 556450
 backupdir: /backups/current/Multiplayer/
 configs:
   "config/server.cfg": "/backups/current/server.cfg"
+metrics:
+  # The Forest is a Steam dedicated server; serverQueryPort (THEFOREST_SERVER_QUERY_PORT,
+  # default 27016 per config/server.cfg) answers Steam A2S_INFO queries.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: THEFOREST_SERVER_QUERY_PORT

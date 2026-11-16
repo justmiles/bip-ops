@@ -5,3 +5,12 @@ steamid: 4020
 backupdir: /game/garrysmod/cfg
 configs:
   "config/server.cfg": "/game/garrysmod/cfg/server.cfg"
+metrics:
+  # Garry's Mod is a native SRCDS (Source engine) server that answers Steam
+  # A2S_INFO on the same UDP port as game traffic. start.sh sets that port via
+  # -port "${GARRYSMOD_PORT:-27015}" and README.md documents "27015 UDP - Game
+  # traffic and Steam A2S query", so query the game port env GARRYSMOD_PORT.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: GARRYSMOD_PORT

@@ -5,3 +5,11 @@ steamid: 255470
 backupdir: /game/hl1mp/cfg
 configs:
   "config/server.cfg": "/game/hl1mp/cfg/server.cfg"
+metrics:
+  strategy: a2s
+  interval: 30s
+  a2s:
+    # Source-engine server: the UDP game port (HLDMS_PORT, default 27015) also
+    # serves Steam A2S_INFO queries (README "Required Ports": 27015/UDP =
+    # "Game traffic and Steam A2S query"; start.sh passes it via -port).
+    query_port_env: HLDMS_PORT

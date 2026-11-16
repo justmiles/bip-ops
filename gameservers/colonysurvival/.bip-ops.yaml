@@ -5,3 +5,13 @@ steamid: 748090
 backupdir: /game/gamedata/savegames
 configs:
   "config/server.config.json": "/game/server.config.json"
+metrics:
+  strategy: a2s
+  interval: 30s
+  a2s:
+    # Colony Survival advertises to the Steam server browser on its game port
+    # (start.sh: 27004/udp is the "game/query port advertised to the server
+    # browser" via +server.gameport, env COLONYSURVIVAL_GAME_PORT). A2S_INFO is
+    # queried on that port. a2s is fail-safe: a challenge/no-response just
+    # reports not-ready, so an empty server is never wrongly stopped.
+    query_port_env: COLONYSURVIVAL_GAME_PORT

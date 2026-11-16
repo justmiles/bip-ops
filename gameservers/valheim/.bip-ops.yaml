@@ -4,3 +4,15 @@ usex: false
 steamid: 896660
 backupdir: /game/saves
 configs: {}
+metrics:
+  # No sound, fail-safe strategy available for Valheim, so leave it idle (never auto-stopped).
+  # - a2s: Valheim's Steam A2S query port is VALHEIM_PORT + 1 (2457, derived automatically -- see README
+  #   Required Ports and "query port is this + 1"). No env var holds 2457; svc-metrics does no offset
+  #   arithmetic (resolveIntEnv reads the literal value), so query_port_env: VALHEIM_PORT would query 2456,
+  #   the raw game UDP socket, which does not answer A2S_INFO. The 27015 fallback is wrong too.
+  # - rcon: Valheim has no RCON (README: admin is via a Steam ID64 admin list; no port/password env exists).
+  # - logregex: join and leave do NOT capture the same identifier. Join "Got character ZDOID from <name>"
+  #   keys on character name (and re-fires on respawn-after-death, double counting; breaks on names with
+  #   spaces), while disconnect "Closing socket <SteamID>" keys on Steam ID. Mismatched keys plus an
+  #   unreliable join line would risk wrongly stopping a populated server, so logregex is unsafe here.
+  strategy: none

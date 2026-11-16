@@ -5,3 +5,12 @@ steamid: 1026340
 backupdir: "/game/.local/share/Daedalic Entertainment GmbH/Barotrauma"
 configs:
   "config/serversettings.xml": "/game/.local/share/Daedalic Entertainment GmbH/Barotrauma/serversettings.xml"
+metrics:
+  # Barotrauma runs a native Steam dedicated server with a dedicated A2S query
+  # port (start.sh: "27016/udp - Steam A2S query (queryport)"), set via the
+  # BAROTRAUMA_QUERY_PORT env var -> serversettings.xml queryport. a2s is the
+  # safe, self-consistent choice (fail-safe: never reports a false-empty count).
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: BAROTRAUMA_QUERY_PORT

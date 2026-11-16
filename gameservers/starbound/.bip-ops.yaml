@@ -5,3 +5,13 @@ steamid: 211820
 backupdir: /game/storage
 configs:
   "config/starbound_server.config": "/game/storage/starbound_server.config"
+metrics:
+  # Starbound's query server speaks the Steam A2S (Source) query protocol on
+  # queryServerPort (STARBOUND_QUERY_PORT, default 21025 per config/starbound_server.config).
+  # a2s is fail-safe: if runQueryServer is left false (the shipped default) the collect
+  # just never reports ready and the server is never wrongly stopped; once an operator
+  # enables the query server it reports the real player count on STARBOUND_QUERY_PORT.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: STARBOUND_QUERY_PORT

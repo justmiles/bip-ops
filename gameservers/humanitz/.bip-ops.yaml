@@ -6,3 +6,16 @@ steambranch: linuxbranch
 backupdir: /game/HumanitZServer/
 configs:
   "config/GameServerSettings.ini": "/game/HumanitZServer/GameServerSettings.ini"
+metrics:
+  strategy: rcon
+  interval: 30s
+  # HumanitZ speaks Valve/Source RCON over TCP (README: "any Valve-compatible RCON
+  # client"). RCON port + password are wired via HUMANITZ_RCON_PORT / HUMANITZ_RCON_PASS
+  # (config/GameServerSettings.ini -> RConPort / RCONPass). The `Players` command lists
+  # each connected player with their SteamID64; count data rows by that 17-digit token
+  # (7656119...), which is absent from empty-list / header text, so an empty server reads 0.
+  rcon:
+    command: Players
+    players_regex: '7656119[0-9]{10}'
+    port_env: HUMANITZ_RCON_PORT
+    password_env: HUMANITZ_RCON_PASS

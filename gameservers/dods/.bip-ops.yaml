@@ -5,3 +5,10 @@ steamid: 232290
 backupdir: /game/dod/cfg
 configs:
   "config/server.cfg": "/game/dod/cfg/server.cfg"
+metrics:
+  # DoD:S is a Source-engine SRCDS that answers Steam A2S_INFO on the game UDP
+  # port (start.sh: -port = "game + A2S query UDP port", env DODS_PORT, default 27015).
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: DODS_PORT

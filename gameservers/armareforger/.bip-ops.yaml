@@ -5,3 +5,12 @@ steamid: 1874900
 backupdir: /game/profile
 configs:
   "config/server.json": "/game/config/server.json"
+metrics:
+  # Arma Reforger ships a native Steam A2S query listener (config a2s.port, bound
+  # 0.0.0.0, default 17777). start.sh documents the port and config/server.json
+  # drives it from ARMAREFORGER_QUERY_PORT, so a2s is the safe self-consistent
+  # strategy; player count comes straight off A2S_INFO.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: ARMAREFORGER_QUERY_PORT

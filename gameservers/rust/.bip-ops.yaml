@@ -5,3 +5,12 @@ steamid: 258550
 backupdir: /game/server/bipops
 configs:
   "config/server.cfg": "/game/server/bipops/cfg/server.cfg"
+metrics:
+  # Rust answers Steam A2S queries on +server.queryport (RUST_QUERY_PORT, default
+  # 28016/udp per start.sh/README). RCON is WebSocket (web RCON), which the rcon
+  # strategy does not support, so a2s on the query port is the correct, fail-safe
+  # player-count source.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: RUST_QUERY_PORT

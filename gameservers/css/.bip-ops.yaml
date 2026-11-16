@@ -5,3 +5,11 @@ steamid: 232330
 backupdir: /game/cstrike/cfg
 configs:
   "config/server.cfg": "/game/cstrike/cfg/server.cfg"
+metrics:
+  # CS:S is a Source engine server; start.sh notes the Steam A2S query shares the
+  # game UDP -port (CSS_PORT, default 27015) with no offset. A2S is self-consistent
+  # and fail-safe, so query the player count there.
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: CSS_PORT

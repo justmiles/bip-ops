@@ -6,3 +6,10 @@ backupdir: /game/ConanSandbox/Saved
 configs:
   "config/ServerSettings.ini": "/game/ConanSandbox/Saved/Config/LinuxServer/ServerSettings.ini"
   "config/Engine.ini": "/game/ConanSandbox/Saved/Config/LinuxServer/Engine.ini"
+metrics:
+  # a2s: native Steam dedicated server exposes a Steam A2S query port via
+  # -QueryPort (start.sh, env CONANEXILES_QUERY_PORT, default 27015).
+  strategy: a2s
+  interval: 30s
+  a2s:
+    query_port_env: CONANEXILES_QUERY_PORT
