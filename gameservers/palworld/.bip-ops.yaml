@@ -6,3 +6,15 @@ backupdir: /game/Pal/Saved/
 configs:
   "config/PalWorldSettings.ini": "/game/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini"
   "config/Engine.ini": "/game/Pal/Saved/Config/LinuxServer/Engine.ini"
+metrics:
+  strategy: rcon
+  interval: 30s
+  rcon:
+    command: ShowPlayers
+    # ShowPlayers response: header line "name,playeruid,steamid", then one line per player.
+    # Count lines that contain two commas (data rows, not the header).
+    players_regex: '[^,\n]+,[^,\n]+,[^,\n]+'
+    port_env: PALWORLD_RCON_PORT
+    password_env: PALWORLD_ADMIN_PASSWORD
+  ready:
+    log_pattern: 'Setting breakpad minidump AppID'

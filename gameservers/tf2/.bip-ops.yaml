@@ -5,3 +5,11 @@ steamid: 232250
 backupdir: /game/tf/cfg
 configs:
   "config/server.cfg": "/game/tf/cfg/server.cfg"
+metrics:
+  strategy: a2s
+  interval: 30s
+  a2s:
+    # TF2 accepts A2S_INFO queries on the same port as the game connection.
+    query_port_env: TF2_PORT
+  ready:
+    log_pattern: 'VAC secure mode is activated'

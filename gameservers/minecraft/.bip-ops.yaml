@@ -6,3 +6,12 @@ backupdir: /game/world
 configs:
   "config/server.properties": "/game/server.properties"
   "config/eula.txt": "/game/eula.txt"
+metrics:
+  strategy: logregex
+  interval: 30s
+  logregex:
+    # Minecraft logs: "[HH:MM:SS] [Server thread/INFO]: PlayerName joined the game"
+    join_pattern: ': (\S+) joined the game'
+    leave_pattern: ': (\S+) left the game'
+  ready:
+    log_pattern: 'Done \([0-9.]'

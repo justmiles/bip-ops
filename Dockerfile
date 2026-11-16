@@ -1,3 +1,11 @@
+# Build svc-metrics Go binary
+FROM golang:1.23-bullseye AS svc-metrics-builder
+WORKDIR /build
+COPY svc-metrics/go.mod svc-metrics/go.sum ./
+RUN go mod download
+COPY svc-metrics/ .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o /svc-metrics .
+
 FROM ubuntu:noble
 
 RUN userdel -r ubuntu && useradd --create-home bipops
@@ -95,6 +103,9 @@ COPY gameservers /gameservers
 
 # Copy bip-ops
 COPY bip-ops.sh /usr/bin/bip-ops
+
+# Copy svc-metrics binary from builder stage
+COPY --from=svc-metrics-builder /svc-metrics /usr/bin/svc-metrics
 
 # S6 settings
 ENV S6_VERBOSITY=1 \
