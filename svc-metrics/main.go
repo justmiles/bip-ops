@@ -17,7 +17,8 @@ func main() {
 	gameserver := os.Getenv("BIPOPS_GAMESERVER")
 	if gameserver == "" || gameserver == "NONE" {
 		slog.Info("BIPOPS_GAMESERVER not set, svc-metrics idle")
-		select {}
+		idleUntilSignal()
+		return
 	}
 
 	metricsURL := os.Getenv("BIPOPS_METRICS_URL")
@@ -31,7 +32,8 @@ func main() {
 
 	if cfg == nil || cfg.Strategy == "" || cfg.Strategy == "none" {
 		slog.Info("metrics strategy: none, svc-metrics idle", "game", gameserver)
-		select {}
+		idleUntilSignal()
+		return
 	}
 
 	interval := parseDuration(cfg.Interval, 30*time.Second)
@@ -77,4 +79,14 @@ func main() {
 // sleepN sleeps for n seconds. Used by logregex retry loop.
 func sleepN(n int) {
 	time.Sleep(time.Duration(n) * time.Second)
+}
+
+// idleUntilSignal blocks until the process receives SIGTERM/SIGINT. Unlike a
+// bare `select {}`, it does not trip Go's "all goroutines are asleep - deadlock"
+// panic, so the service idles cleanly (no s6 restart loop) for games with
+// strategy: none until s6 stops the container.
+func idleUntilSignal() {
+	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGTERM, syscall.SIGINT)
+	defer stop()
+	<-ctx.Done()
 }
