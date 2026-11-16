@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.13.6] - 2026-11-16
+
+### Fixed
+
+- `svc-metrics` `logregex` strategy now actually follows the game log. It previously seeked to
+  end-of-file and relied on `bufio.Scanner`, which does not follow a growing file, so appended
+  join/leave lines were never read (player count stuck at 0) and the pre-attach readiness line
+  was missed (`server_ready` stuck at 0). It now reads from the start and polls for appended
+  lines, reconstructing the live player set and catching the readiness line. Also handles
+  s6-log rotation. Affects Necesse (the only `logregex` game).
+
+
 ## [0.13.5] - 2026-11-16
 
 ### Fixed
