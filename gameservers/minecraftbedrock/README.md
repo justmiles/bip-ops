@@ -70,7 +70,8 @@ docker run --rm -it --name bip-ops \
 | ----------------------------------------- | ---------- | ------------------------------------------------------------- |
 | MINECRAFTBEDROCK_MAX_PLAYERS              | `10`       | Maximum concurrent players                                    |
 | MINECRAFTBEDROCK_ONLINE_MODE              | `true`     | Require Xbox Live authentication                              |
-| MINECRAFTBEDROCK_ALLOW_LIST               | `false`    | Restrict connections to `allowlist.json`                      |
+| MINECRAFTBEDROCK_ALLOWED_PLAYERS          | _(empty)_  | Comma-separated Xbox gamertags to allowlist (e.g. `Alice,Bob`). When set, `allowlist.json` is generated automatically and `allow-list` is forced to `true`. |
+| MINECRAFTBEDROCK_ALLOW_LIST               | `false`    | Enable allowlist without managing it via `ALLOWED_PLAYERS` (use when you manage `allowlist.json` manually in the game volume). |
 | MINECRAFTBEDROCK_ALLOW_PLAYER_JOINING     | `true`     | Allow new players to join (set false to lock server)          |
 | MINECRAFTBEDROCK_PLAYER_IDLE_TIMEOUT      | `30`       | Kick idle players after N minutes (0=disabled)                |
 | MINECRAFTBEDROCK_DEFAULT_PERMISSION       | `member`   | Default permission level (visitor/member/operator)            |
