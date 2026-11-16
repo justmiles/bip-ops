@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"os"
 	"regexp"
+	"strings"
 	"sync"
 )
 
@@ -58,18 +59,24 @@ func (s *logregexStrategy) Collect() (Sample, error) {
 	}, nil
 }
 
-// tailLog opens the log file, seeks to the end, and streams new lines.
-// Retries on open failure (file may not exist yet during server boot).
+// tailLog follows the log file, reopening it when it is rotated or briefly
+// disappears. Retries on open failure (file may not exist yet during boot).
 func (s *logregexStrategy) tailLog() {
 	for {
 		if err := s.streamLog(); err != nil {
 			slog.Debug("logregex: stream ended, retrying", "error", err)
 		}
-		// Wait before retry; avoids tight loop when file absent during boot.
+		// Wait before retry; avoids a tight loop when the file is absent.
 		waitForFile(s.logFile, 5)
 	}
 }
 
+// streamLog reads the log from the beginning, then follows appended lines,
+// polling on EOF. Reading from the start (rather than seeking to the end)
+// reconstructs the current player set and catches the readiness line even if the
+// server became ready before svc-metrics attached. bufio.Scanner cannot follow a
+// growing file, so we poll with a bufio.Reader and accumulate partial lines.
+// Returns so tailLog can reopen when the log is rotated.
 func (s *logregexStrategy) streamLog() error {
 	f, err := os.Open(s.logFile)
 	if err != nil {
@@ -77,17 +84,42 @@ func (s *logregexStrategy) streamLog() error {
 	}
 	defer f.Close()
 
-	// Seek to end so we only process lines written after startup.
-	if _, err := f.Seek(0, io.SeekEnd); err != nil {
-		return err
-	}
+	startInfo, _ := f.Stat()
 
-	scanner := bufio.NewScanner(f)
-	for scanner.Scan() {
-		line := scanner.Text()
-		s.processLine(line)
+	reader := bufio.NewReader(f)
+	var pending strings.Builder
+	for {
+		chunk, rerr := reader.ReadString('\n')
+		switch rerr {
+		case nil:
+			// Complete line (chunk ends in '\n'), completing any held partial.
+			pending.WriteString(chunk)
+			s.processLine(strings.TrimRight(pending.String(), "\r\n"))
+			pending.Reset()
+		case io.EOF:
+			// Hold any newline-less tail until the rest is written.
+			pending.WriteString(chunk)
+			if logRotated(s.logFile, startInfo) {
+				return nil
+			}
+			sleepN(1)
+		default:
+			return rerr
+		}
 	}
-	return scanner.Err()
+}
+
+// logRotated reports whether the path now resolves to a different file than the
+// one we opened (s6-log rotation replaces `current` with a fresh inode).
+func logRotated(path string, start os.FileInfo) bool {
+	if start == nil {
+		return false
+	}
+	fi, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return !os.SameFile(start, fi)
 }
 
 func (s *logregexStrategy) processLine(line string) {
