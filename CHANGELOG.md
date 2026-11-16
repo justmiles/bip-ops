@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.13.3] - 2026-11-16
+
+### Added
+
+- `svc-metrics` sidecar binary for idle auto-shutoff: collects active player counts via RCON,
+  A2S query, or log-regex strategies; exposes metrics to `svc-shutoff` and reports server
+  readiness signal
+
+
 ## [0.13.2] - 2026-11-15
 
 ### Fixed
