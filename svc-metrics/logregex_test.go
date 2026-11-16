@@ -45,12 +45,10 @@ func TestLogregexFollowsNecesse(t *testing.T) {
 	appendLine(`[t] Client "76561190000000002" connected on slot 1/10`)
 	waitFor(t, func() bool { sm, _ := s.Collect(); return sm.ActivePlayerCount == 2 }, "count==2 after second player joins")
 
-	// Player names must be anonymised (never expose raw Steam IDs).
+	// logregex never exposes internal identifiers as player names.
 	sm, _ := s.Collect()
-	for _, name := range sm.PlayerNames {
-		if name == "76561190000000001" || name == "76561190000000002" {
-			t.Errorf("Steam ID leaked as player name: %q", name)
-		}
+	if len(sm.PlayerNames) != 0 {
+		t.Errorf("logregex should not report player names, got %v", sm.PlayerNames)
 	}
 
 	// A disconnect must decrement by the same captured Steam ID.

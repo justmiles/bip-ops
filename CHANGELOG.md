@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.13.8] - 2026-11-16
+
+### Fixed
+
+- `logregex` strategy no longer reports player names. The only identifiers
+  available from game logs at connect time are internal (Steam IDs), which
+  should not surface in the UI. Count-only reporting is consistent with how
+  the `a2s` strategy handles player identity.
+
+
 ## [0.13.7] - 2026-11-16
 
 ### Fixed
