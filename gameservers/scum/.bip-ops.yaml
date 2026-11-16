@@ -1,0 +1,16 @@
+game: SCUM
+usewine: true
+usex: false
+steamid: 3792580
+backupdir: /game/SCUM/Saved
+metrics:
+  # strategy: none. SCUM exposes a Steam A2S query port, but ONLY on SCUM_PORT+2
+  # (default 7779; see README Ports table and start.sh "clients connect to PORT+2,
+  # the Steam query port"). svc-metrics' a2s strategy queries the literal value of
+  # query_port_env with no +2 offset, and the only wired env var (SCUM_PORT=7777)
+  # holds the GAME port, not the query port -- A2S_INFO is not answered on 7777, so
+  # a2s would permanently error ("not ready") and never actually report a count.
+  # No SCUM_QUERY_PORT env exists to point at (must not invent one). RCON is
+  # unwired (no port/password env in start.sh). UE4 join/leave log lines are
+  # unverified, so logregex would be an unsafe guess. none is the fail-safe outcome.
+  strategy: none
