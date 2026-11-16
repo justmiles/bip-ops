@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+## [0.13.5] - 2026-11-16
+
+### Fixed
+
+- `svc-metrics` logs now reach container stdout (and thus Loki): added the missing `1` action
+  to its `s6-log` pipeline, so the service is no longer silent like every other service was visible.
+- `svc-metrics` with `strategy: none` now idles cleanly on a signal instead of hitting a bare
+  `select {}` that triggered Go's "all goroutines are asleep - deadlock" panic and an s6 restart loop.
+
+
 ## [0.13.4] - 2026-11-16
 
 ### Added
